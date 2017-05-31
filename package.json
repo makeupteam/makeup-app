@@ -1,0 +1,11 @@
+{
+  "name": "makeup-app",
+  "version": "1.0.0",
+  "description": "project4: makeup api",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sonny, Irene, Kait, Robin",
+  "license": "ISC"
+}
