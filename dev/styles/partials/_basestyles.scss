@@ -1,0 +1,47 @@
+html{
+	font-size: 62.5%;
+}
+
+body{
+	font-family: $headingFont;
+	font-family: $bodyFont;
+}
+
+h1, h2, h3, h4, h5, h6{
+	padding: 0;
+	margin: 0;
+	font-family: $headingFont;
+}
+
+p{
+	font-family: $bodyFont;
+}
+
+ul{
+	list-style: none;
+	margin:0;
+	padding: 0;
+}
+
+img{
+	max-width: 100%;
+	display: block;
+}
+
+.view {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: visibility 0s linear 0.3s, opacity 0.3s 0.3s;
+}
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.3s, opacity 0.3s;
+}
+
+
+
+
+
