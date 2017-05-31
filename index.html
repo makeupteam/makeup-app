@@ -7,10 +7,56 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Makeup Trendz</title>
     <!-- Temporary Title? -->
+    <link rel="stylesheet" href="public/styles/styles.css">
 </head>
 
 <body>
 
+    <div class="main">
+        <header>
+            <h1>Makeup Trendz</h1>
+            <button>My Wishlist</button>
+        </header>
+
+        <main>
+            <div class="filters">
+                <label for="looks">Filter Looks:</label>
+                <select name="looks" id="looks-select">
+                    <option value="Eye-look">Eyes</option>
+                    <option value="eagle">Lips</option>
+                    <option value="dragon">Contour</option>
+                    <option value="elephant">Full-face</option>
+                 </select>
+
+                <label for="sort">Sort By:</label>
+                <select name="sort" id="sort-select">
+                    <option value="Eye-look">Most Popular</option>
+                    <option value="eagle">Newest To Oldest</option>
+                    <option value="dragon">Oldest to Newest</option>
+                 </select>
+            </div>
+
+            <div class="looks-gallery">
+
+            </div>
+        </main>
+
+        <footer>
+            <p>Website built by: Sonny, Irene, Kait, Robin</p>
+        </footer>
+    </div>
+
+    <div class="details view hidden">
+        <div class="look-details">
+            <!--fill the contents of this page-->
+        </div>
+    </div>
+
+    <div class="wishlist view hidden">
+
+    </div>
+
+    <script type='text/javascript' src='public/scripts/script.js'></script>
 </body>
 
 </html>
