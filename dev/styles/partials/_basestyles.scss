@@ -1,29 +1,26 @@
-html{
-	font-size: 62.5%;
+html {
+	font-size: 100%;
 }
 
-body{
-	font-family: $headingFont;
+body {
 	font-family: $bodyFont;
+	margin: 0;
+	padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6 {
+	font-family: $headingFont;
 	padding: 0;
 	margin: 0;
-	font-family: $headingFont;
 }
 
-p{
-	font-family: $bodyFont;
-}
-
-ul{
+ul {
 	list-style: none;
 	margin:0;
 	padding: 0;
 }
 
-img{
+img {
 	max-width: 100%;
 	display: block;
 }
