@@ -17,13 +17,27 @@ makeupApp.looks = [];
 
 makeupApp.init = function() {
 	looksDB.once('value', function(res){
-		// makeupApp.looks = res.val();
 		let data = res.val();
 		for (var look in data) {
 			makeupApp.looks.push(data[look]);
 		}
+		makeupApp.loadLooks();
 	})
 };
+
+// dynamically adds look information from firebase
+makeupApp.loadLooks = function() {
+	var looksGallery = $('.looks-gallery');
+	var lookTemplate = $('#look-template').html();
+	makeupApp.looks.forEach(function(look) {
+		var templateItem = $(lookTemplate);
+		templateItem.find('.look-type').text(look.lookType);
+		templateItem.find('.look-image').attr('src', look.imageURL);
+		templateItem.find('.like-number').text(look.likes);
+		// append info to DOM
+		looksGallery.append(templateItem);
+	});
+}
 
 // docready
 $(function(){
