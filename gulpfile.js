@@ -12,7 +12,7 @@ gulp.task('browser-sync', () => {
 	});
 });
 
-gulp.task('styles', () => {				
+gulp.task('styles', () => {
 	return gulp.src('./dev/styles/**/*.scss')	//globing pattern - ** look in any folder and any file
 		.pipe(sass().on('error', sass.logError))	//when there is a compiling issue .on will trigger
 		.pipe(autoprefixer('last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
@@ -30,11 +30,10 @@ gulp.task('scripts', () => {
 	.pipe(reload({stream: true}));
 });
 
-	gulp.task('watch', () => {
+gulp.task('watch', () => {
 	gulp.watch('./dev/styles/**/*.scss', ['styles']);
 	gulp.watch('./dev/scripts/ain.js', ['scripts']);
 	gulp.watch('*.html', reload);
 });
 
 gulp.task('default', ['browser-sync', 'styles', 'scripts', 'watch']);
-

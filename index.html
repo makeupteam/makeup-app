@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Makeup Trendz</title>
     <!-- Temporary Title? -->
-    <link rel="stylesheet" href="public/styles/styles.css">
+    <link rel="stylesheet" href="public/styles/style.css">
 </head>
 
 <body>
@@ -56,7 +56,20 @@
 
     </div>
 
-    <script type='text/javascript' src='public/scripts/script.js'></script>
+	<script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
+	<script>
+	// Initialize Firebase
+	var config = {
+		apiKey: "AIzaSyCBglzrqevMRAKJWrr_-ZWWJj7lCGqJEso",
+		authDomain: "makeup-app-d1fac.firebaseapp.com",
+		databaseURL: "https://makeup-app-d1fac.firebaseio.com",
+		projectId: "makeup-app-d1fac",
+		storageBucket: "makeup-app-d1fac.appspot.com",
+		messagingSenderId: "220771434860"
+	};
+	firebase.initializeApp(config);
+	</script>
+	<script type='text/javascript' src='public/scripts/script.js'></script>
 </body>
 
 </html>
