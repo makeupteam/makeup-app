@@ -16,13 +16,13 @@ gulp.task('styles', () => {
 	return gulp.src('./dev/styles/**/*.scss')	//globing pattern - ** look in any folder and any file
 		.pipe(sass().on('error', sass.logError))	//when there is a compiling issue .on will trigger
 		.pipe(autoprefixer('last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
-		.pipe(concat('style.css'))
+		.pipe(concat('styles.css'))
 		.pipe(gulp.dest('./public/styles'))
 		.pipe(reload({stream: true}));
 });
 
 gulp.task('scripts', () => {
-	return gulp.src('./dev/scripts/main.js')
+	return gulp.src('./dev/scripts/script.js')
 	.pipe(babel({
 		presets: ['es2015']
 	}))
@@ -32,7 +32,7 @@ gulp.task('scripts', () => {
 
 	gulp.task('watch', () => {
 	gulp.watch('./dev/styles/**/*.scss', ['styles']);
-	gulp.watch('./dev/scripts/ain.js', ['scripts']);
+	gulp.watch('./dev/scripts/script.js', ['scripts']);
 	gulp.watch('*.html', reload);
 });
 
