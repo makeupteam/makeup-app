@@ -8,3 +8,20 @@ var config = {
 	messagingSenderId: "220771434860"
 };
 firebase.initializeApp(config);
+
+let looksDB = firebase.database().ref('looks');
+
+var makeupApp = {};
+
+makeupApp.looks = {};
+
+makeupApp.init = function() {
+	looksDB.once('value', function(res){
+		makeupApp.looks = res.val();
+	})
+};
+
+// docready
+$(function(){
+	makeupApp.init();
+})
