@@ -32,13 +32,16 @@ makeupApp.loadLooks = function() {
 	var lookTemplate = $('#look-template').html();
 	makeupApp.looks.forEach(function(look) {
 		var templateItem = $(lookTemplate); // magic
+		console.log(look);
 		templateItem.find('.look-type').text(look.lookType);
 		templateItem.find('.look-image').attr('src', look.imageURL);
 		templateItem.find('.like-number').text(look.likes);
 		// append info to DOM
 		looksGallery.append(templateItem);
 		// grab look ID from Firebase
-		
+		$(templateItem).on('click', function() {
+			
+		})
 	});
 	makeupApp.getProductData();
 }
@@ -53,7 +56,7 @@ makeupApp.getProductData = function() {
 		let productResults = res;
 		productResults.forEach(function(result) {
 			makeupApp.products[result.id] = result;
-			console.log(makeupApp.products[result.id]);
+			// console.log(makeupApp.products[result.id]);
 		});
 	});
 }
