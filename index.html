@@ -7,9 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Makeup Trendz</title>
     <!-- Temporary Title? -->
-    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700|Roboto" rel="stylesheet">
+
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.css">
     <link rel="stylesheet" href="public/styles/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,500|Roboto:300,400" rel="stylesheet">
     <script type="text/template" id="look-template">
         <div class="look-cell">
             <button class="overlay">
@@ -82,10 +83,47 @@
             <div class="pinned-product-section">
                 <h3 class="pinned-product-caption">You have pinned these products from this look</h3>
                 <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
-                    <!-- template, to be removed -->
+                    <!-- wishlist carousel template, to be removed -->
+                    <div class="carousel-cell">
+                        <img src="" class="product-image__small">
+                    </div>
                 </div>
+                <h4 class="total">Total:<span class="total-value"></span></h4>
+                <button class="add-to-wishlist">Add these products to my wishlist</button>
             </div>
         </div>
+
+        <div class="product-section">
+            <div class="filter">
+                <div class="category-filter">
+                    <h4 class="filter-title">Category</h4>
+                    <div class="categories">
+                        <!-- category template: to be removed -->
+                        <div class="options">
+                            <input type="checkbox" id="" value="" name="categories">
+                            <label for=""><span></span></label>
+                        </div>
+                    </div>
+                    <div class="brands">
+                        <!-- category template: to be removed -->
+                        <div class="options">
+                            <input type="checkbox" id="" value="" name="brands">
+                            <label for=""><span></span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="brand-filter"></div>
+                <div class="price-slider">
+                    <div class="slider-range"></div>
+                    <span class="lower-end"></span>
+                    <span class="higher-end"></span>
+                </div>
+            </div>
+
+
+
+        </div>
+
 
 
 
