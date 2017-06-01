@@ -29,7 +29,7 @@ makeupApp.init = function() {
 	});
 
 	$('#looks-sort').on('change', function(){
-		
+
 	});
 };
 
@@ -38,17 +38,15 @@ makeupApp.loadLooks = function() {
 	var looksGallery = $('.looks-gallery');
 	var lookTemplate = $('#look-template').html();
 	makeupApp.looks.forEach(function(look) {
-
 		var templateItem = $(lookTemplate);//magic
-
 		templateItem.find('.look-type').text(look.lookType);
 		templateItem.find('.look-image').attr('src', look.imageURL);
 		templateItem.find('.like-number').text(look.likes);
 		// append info to DOM
 		looksGallery.append(templateItem);
 		// grab look ID from Firebase
-		$(templateItem).on('click', function() {
-			
+		$(templateItem).find('.overlay').on('click', function() {
+			// makeDetailedView(look); function that will build the detailed product view
 		})
 	});
 	makeupApp.getProductData();
