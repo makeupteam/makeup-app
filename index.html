@@ -9,6 +9,23 @@
     <!-- Temporary Title? -->
     <link href="https://fonts.googleapis.com/css?family=Oswald:400,700|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="public/styles/styles.css">
+    <script type="text/template" id="look-template">
+        <div class="look-cell">
+            <button class="overlay">
+                <img src="assets/plus sign.png" alt="View Detail">
+                <h5 class="look-type"></h5>
+            </button>
+
+            <div class="photo-cell">
+                <img src="" alt="">
+            </div>
+
+            <div class="likes-cell">
+                <button class="like-button"><img src="assets/heart.png" alt=""></button>
+                <h5 class="like-number"></h5>
+            </div>
+        </div>
+    </script>
 </head>
 
 <body>
@@ -43,6 +60,21 @@
 
             <div class="looks-gallery">
 
+                <div class="look-cell">
+                    <div class="likes-cell">
+                        <button class="like-button"><img src="assets/heart.png" alt=""></button>
+                        <h5 class="like-number">50</h5>
+                    </div>
+                    <button class="overlay">
+                        <img src="assets/plus sign.png" alt="View Detail">
+                        <h5 class="look-type">FULL FACES</h5>
+                    </button>
+
+                    <div class="photo-cell">
+                        <img src="" alt="">
+                    </div>
+
+                </div>
             </div>
         </main>
 
@@ -53,8 +85,17 @@
 
     <div class="details view hidden">
         <div class="look-details">
-            <!--fill the contents of this page-->
+            <div class="look-info-container">
+                <div class="look-img-cell">
+
+                </div>
+                <h2 class="look-name"></h1>
+                <h3 class="look-likes"></h2>
+            </div>
         </div>
+
+
+
     </div>
 
     <div class="wishlist view hidden">
