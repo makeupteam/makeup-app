@@ -8,6 +8,7 @@
     <title>Makeup Trendz</title>
     <!-- Temporary Title? -->
     <link href="https://fonts.googleapis.com/css?family=Oswald:400,700|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.css">
     <link rel="stylesheet" href="public/styles/styles.css">
     <script type="text/template" id="look-template">
         <div class="look-cell">
@@ -69,11 +70,20 @@
     <div class="details view hidden">
         <div class="look-details">
             <div class="look-info-container">
-                <div class="look-img-cell">
 
-                </div>
+                <div class="look-img-cell"></div>
+
                 <h2 class="look-name"></h1>
+
                 <h3 class="look-likes"></h2>
+
+            </div>
+
+            <div class="pinned-product-section">
+                <h3 class="pinned-product-caption">You have pinned these products from this look</h3>
+                <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
+                    <!-- template, to be removed -->
+                </div>
             </div>
         </div>
 
@@ -88,6 +98,7 @@
 	<script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type='text/javascript' src='public/scripts/script.js'></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.js"></script>
 </body>
 
 </html>
