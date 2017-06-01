@@ -13,11 +13,15 @@ let looksDB = firebase.database().ref('looks');
 
 var makeupApp = {};
 
-makeupApp.looks = {};
+makeupApp.looks = [];
 
 makeupApp.init = function() {
 	looksDB.once('value', function(res){
-		makeupApp.looks = res.val();
+		// makeupApp.looks = res.val();
+		let data = res.val();
+		for (var look in data) {
+			makeupApp.looks.push(data[look]);
+		}
 	})
 };
 
