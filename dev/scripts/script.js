@@ -29,8 +29,9 @@ makeupApp.init = function() {
 	});
 
 	$('#looks-sort').on('change', function(){
-
+		let sort = $(this).val();
 	});
+
 };
 
 // dynamically adds look information from firebase
