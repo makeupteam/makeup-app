@@ -7,33 +7,38 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Makeup Trendz</title>
     <!-- Temporary Title? -->
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="public/styles/styles.css">
 </head>
 
 <body>
 
-    <div class="main">
+    <div class="wrapper">
         <header>
             <h1>Makeup Trendz</h1>
             <button>My Wishlist</button>
         </header>
 
         <main>
-            <div class="filters">
-                <label for="looks">Filter Looks:</label>
-                <select name="looks" id="looks-select">
-                    <option value="Eye-look">Eyes</option>
-                    <option value="eagle">Lips</option>
-                    <option value="dragon">Contour</option>
-                    <option value="elephant">Full-face</option>
-                 </select>
+            <div class="gallery-options">
+                <div class="option-container">
+                    <label for="looks">Filter Looks:</label>
+                    <select name="looks" id="looks-filter">
+                        <option value="eyes">Eyes</option>
+                        <option value="lips">Lips</option>
+                        <option value="contour">Contour</option>
+                        <option value="full">Full-face</option>
+                    </select>
+                </div>
 
-                <label for="sort">Sort By:</label>
-                <select name="sort" id="sort-select">
-                    <option value="Eye-look">Most Popular</option>
-                    <option value="eagle">Newest To Oldest</option>
-                    <option value="dragon">Oldest to Newest</option>
-                 </select>
+                <div class="option-container">
+                    <label for="sort">Sort By:</label>
+                    <select name="sort" id="looks-sort">
+                        <option value="popular">Most Popular</option>
+                        <option value="newest">Newest To Oldest</option>
+                        <option value="oldest">Oldest to Newest</option>
+                    </select>
+                </div>
             </div>
 
             <div class="looks-gallery">
