@@ -54,14 +54,12 @@
         <main>
             <div class="gallery-options">
                 <div class="option-container">
-                    <label for="looks">Filter Looks:</label>
-                    <select name="looks" id="looks-filter">
-                        <option value="all">All</option>
-                        <option value="eyes">Eyes</option>
-                        <option value="lips">Lips</option>
-                        <option value="contour">Contour</option>
-                        <option value="full">Full-face</option>
-                    </select>
+                    <div class="filter-container">
+                        <button data-filter= ".eyes">Eyes</button>
+                        <button data-filter= ".lips">Lips</button>
+                        <button data-filter= ".contour">Contour</button>
+                        <button data-filter= ".fullFace">Full-face</button>
+                     </div>
                 </div>
 
                 <div class="option-container">
@@ -146,6 +144,7 @@
 
 	<script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 	<script src='public/scripts/script.js'></script>
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.js"></script>
 </body>
