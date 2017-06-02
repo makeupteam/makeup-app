@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.css">
     <link rel="stylesheet" href="public/styles/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,500|Roboto:300,400" rel="stylesheet">
+
+    <!-- Template for look photo gallery on home page -->
     <script type="text/template" id="look-template">
         <div class="look-cell">
             <button class="overlay">
@@ -28,17 +30,25 @@
             </div>
         </div>
     </script>
-
+    <!-- template for product gallery on detail page -->
     <script type="text/template" id="product-detail-template">
         <div class="product-cell">
             <div class="product-overlay">
 
                 <div class="product-img-cell"><img src=""></div>
-                <div class="add-to-list">+</div>
+                <button class="add-to-total">+</button>
                 <h5 class="product-price"></h5>
 
             </div>
             <h4 class="product-name"></h4>
+        </div>
+    </script>
+    <!-- template for detail page wishlist flickity -->
+    <script type="text/template" id="product-carousel">
+        <div class="carousel-cell">
+            <img src="" class="product-image__small">
+            <!-- show on hover -->
+            <h4 class="product-name__small"></h4>
         </div>
     </script>
 </head>
@@ -80,7 +90,7 @@
         </footer>
     </div>
 
-    <div class="details view">
+    <div class="details-view clearfix">
         <div class="look-details">
             <div class="look-info-container">
                 <div class="look-img-cell"><img src=""></div>
@@ -92,9 +102,7 @@
                 <h3 class="pinned-product-caption">You have pinned these products from this look</h3>
                 <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
                     <!-- wishlist carousel template, to be removed -->
-                    <div class="carousel-cell">
-                        <img src="" class="product-image__small">
-                    </div>
+
                 </div>
                 <h4 class="total">Total:<span class="total-value"></span></h4>
                 <button class="add-to-wishlist">Add these products to my wishlist</button>
