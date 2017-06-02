@@ -28,6 +28,7 @@ makeupApp.init = function() {
 			makeupApp.looks.push(data[look]);
 		}
 		makeupApp.loadLooks();
+		makeupApp.looksGallerySetup();
 	});
 
 	// setup listeners for main page
@@ -101,6 +102,24 @@ makeupApp.makeDetailedPage = function(look){
 	}
 }
 
+makeupApp.looksGallerySetup = function () {
+
+	var looksGallery = $('.looks-gallery').isotope({
+	  itemSelector: '.look-cell',
+	  stagger: 10
+	 
+	});
+
+	var filterButtons = $('.filter-container');
+
+	filterButtons.on( 'click', 'button', function() {
+	  var filterValue = $(this).attr('data-filter');
+	  console.log(filterValue);
+	  looksGallery.isotope({ filter: filterValue });
+	  filterButtons.find('.is-checked').removeClass('is-checked');
+	  $(this).addClass('is-checked');
+	});    
+}
 
 
 
