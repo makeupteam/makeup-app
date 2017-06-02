@@ -83,12 +83,14 @@ makeupApp.makeDetailedPage = function(look){
 	$('.look-img-cell img').attr('src', look.imageURL);
 	$('.look-name').text(look.name);
 	$('.look-likes').text(look.likes);
+	let totalArr = [];
 
 	// filling product template with related products based on look selected
 	var productGallery = $('.products-gallery');
 	var productTemplate = $('#product-detail-template').html();
 	for (var product in look.products) {
-		var productInfo = makeupApp.products[look.products[product]];
+		let productInfo = makeupApp.products[look.products[product]];
+
 		var productTemplateItem = $(productTemplate);
 		productTemplateItem.find('.product-img-cell img').attr('src', productInfo.image_link);
 		productTemplateItem.find('.product-price').text(productInfo.price);
@@ -97,26 +99,42 @@ makeupApp.makeDetailedPage = function(look){
 		productGallery.append(productTemplateItem);
 
 		// fill in filters based on existing categories
-
+		// click listener for add to wishlist
+		var carousel = $('.main-carousel');
+		var carouselTemplate = $('#product-carousel').html();
+		productTemplateItem.find('.add-to-total').on('click', function() {
+			var carouselTemplateItem = $(carouselTemplate);
+			carouselTemplateItem.find('.product-image__small').attr('src', productInfo.image_link);
+			carouselTemplateItem.find('.product-name__small').text(productInfo.name);
+			carousel.append(carouselTemplateItem);
+			let price = parseInt(productInfo.price);
+			totalArr.push(price);
+			// console.log(totalArr);
+			// calculate total price of pinned item
+			let totalValue = totalArr.reduce(function(acc, value) {
+				return acc + value;
+			}, 0);
+			$('.total-value').text(totalValue);
+		});
 	}
 };
 
 makeupApp.looksGallerySetup = function () {
 	// Set up isotope.js on looks gallery
 	var looksGallery = $('.looks-gallery').isotope({
-	    itemSelector: '.look-cell',
-	    stagger: 10
+	  itemSelector: '.look-cell',
+	  stagger: 10
 	});
 
 	var filterButtons = $('.filter-container');
 
 	// Set up click listener to for filter buttons
 	filterButtons.on( 'click', 'button', function() {
-	    var filterValue = $(this).attr('data-filter');
-	    looksGallery.isotope({ filter: filterValue });
-	    filterButtons.find('.is-checked').removeClass('is-checked');
-	    $(this).addClass('is-checked');
-	});    
+	  var filterValue = $(this).attr('data-filter');
+	  looksGallery.isotope({ filter: filterValue });
+	  filterButtons.find('.is-checked').removeClass('is-checked');
+	  $(this).addClass('is-checked');
+	});
 };
 
 // document ready

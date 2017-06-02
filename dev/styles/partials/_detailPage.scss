@@ -1,0 +1,34 @@
+.details-view {
+    width: 90vw;
+    margin: auto;
+    .look-details {
+        float: left;
+        width: 35%;
+    }
+    .product-section {
+        float: right;
+        width: 60%;
+    }
+}
+
+.products-gallery {
+    .product-cell {
+        display: inline-block;
+        width: 15vw;
+        height: auto;
+        overflow: hidden;
+        .product-img-cell {
+            width: 15vw;
+            height: 15vw;
+            position: relative;
+            border: 1px solid lightsteelblue;
+            img {
+                height: 100%;
+                position: absolute;
+                left: 50%;
+                // top: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+}
