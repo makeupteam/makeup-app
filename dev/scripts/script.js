@@ -11,30 +11,36 @@ firebase.initializeApp(config);
 
 let looksDB = firebase.database().ref('looks');
 
+// App setup
 var makeupApp = {};
 
 makeupApp.looks = [];
 makeupApp.products = [];
 
 makeupApp.init = function() {
-	looksDB.once('value', function(res){
+	// make API call to fetch products data
+	makeupApp.getProductData();
+
+	// load firebase data
+	looksDB.once('value', function(res) {
 		let data = res.val();
 		for (var look in data) {
 			makeupApp.looks.push(data[look]);
 		}
 		makeupApp.loadLooks();
 	});
-	$('#looks-filter').on('change', function(){
+
+	// setup listeners for main page
+	$('#looks-filter').on('change', function() {
 		let filter = $(this).val();
 	});
 
-	$('#looks-sort').on('change', function(){
+	$('#looks-sort').on('change', function() {
 		let sort = $(this).val();
 	});
-
 };
 
-// dynamically adds look information from firebase
+// dynamically add looks-thumbnails to main page gallery
 makeupApp.loadLooks = function() {
 	var looksGallery = $('.looks-gallery');
 	var lookTemplate = $('#look-template').html();
@@ -45,13 +51,12 @@ makeupApp.loadLooks = function() {
 		templateItem.find('.like-number').text(look.likes);
 		// append info to DOM
 		looksGallery.append(templateItem);
-		// grab look ID from Firebase
+		// setup click listener for the look thumbnail
 		$(templateItem).find('.overlay').on('click', function() {
 			// makeDetailedView(look); function that will build the detailed product view
-		})
+		});
 	});
-	makeupApp.getProductData();
-}
+};
 
 // AJAX call to apiKey
 makeupApp.getProductData = function() {
@@ -66,9 +71,9 @@ makeupApp.getProductData = function() {
 			// console.log(makeupApp.products[result.id]);
 		});
 	});
-}
+};
 
-// docready
-$(function(){
+// document ready
+$(function() {
 	makeupApp.init();
-})
+});
