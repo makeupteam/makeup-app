@@ -62,12 +62,34 @@ makeupApp.loadLooks = function() {
 	var lookTemplate = $('#look-template').html();
 	makeupApp.looks.forEach(function(look) {
 		var templateItem = $(lookTemplate);//magic
-
 		// fill the template with the look's info
 		templateItem.find('.look-type').text(look.lookType);
 		templateItem.addClass(`${look.filter}`);
+		templateItem.attr('id', `likes-cell-${look.id}`)
 		templateItem.find('.look-image').attr('src', look.imageURL);
 		templateItem.find('.like-number').text(look.likes);
+		templateItem.find('.like-button').on('click', function () {//selects template item
+			// TO DO
+			// IF heart is filled in, return early exiting the function
+
+
+			//find the like button, on click, function runs
+			looksDB.update({//updates the DB with
+				[`look${look.id}`]: Object.assign({}, look, {
+					//corresponding look thats being clicked, goes into DB
+					//assigns all previous values and updating likes value
+					likes: look.likes += 1,
+					//update is being sent to DB
+				})
+			})
+			.then(function() {
+				$(`#likes-cell-${look.id} .like-number`).text(look.likes);
+
+				//TO DO
+				// find the appropraite like button and fill in the heart
+			});
+
+		});
 
 		// append info to DOM
 		looksGallery.append(templateItem);
