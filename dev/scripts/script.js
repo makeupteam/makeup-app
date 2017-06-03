@@ -13,7 +13,7 @@ let looksDB = firebase.database().ref('looks');
 
 // App setup
 var makeupApp = {};
-console.log("hey there testing");
+
 makeupApp.looks = [];
 makeupApp.products = [];
 
