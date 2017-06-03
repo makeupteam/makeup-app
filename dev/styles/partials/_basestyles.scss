@@ -38,6 +38,10 @@ img {
     transition: visibility 0s linear 0.3s, opacity 0.3s;
 }
 
+.disable-buttons {
+    pointer-events: none;
+}
+
 
 
 
