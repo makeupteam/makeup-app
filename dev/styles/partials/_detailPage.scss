@@ -9,7 +9,13 @@
         float: right;
         width: 60%;
     }
+    // change this to posab later
+    .exit-button {
+        float: right
+
+    }
 }
+
 
 .products-gallery {
     .product-cell {
@@ -31,4 +37,20 @@
             }
         }
     }
+}
+
+.main-carousel {
+  background: #FAFAFA;
+  position: relative;
+  height: 200px;
+  // width: 100%;
+}
+
+.carousel-cell {
+  width: 20%;
+  height: 200px;
+  margin-right: 10px;
+  border-radius: 5px;
+  // counter-increment: carousel-cell;
+  display: inline-block;
 }
