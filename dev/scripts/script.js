@@ -60,7 +60,7 @@ makeupApp.loadLooks = function() {
 	var lookTemplate = $('#look-template').html();
 	makeupApp.looks.forEach(function(look) {
 		var templateItem = $(lookTemplate);//magic
-		
+
 		// fill the template with the look's info
 		templateItem.find('.look-type').text(look.lookType);
 		templateItem.addClass(`${look.filter}`);
@@ -134,6 +134,11 @@ makeupApp.looksGallerySetup = function () {
 	  looksGallery.isotope({ filter: filterValue });
 	  filterButtons.find('.is-checked').removeClass('is-checked');
 	  $(this).addClass('is-checked');
+	});
+
+	// Set up click listener for like buttons
+	$('.likes-cell').on('click', 'button', function() {
+		console.log(makeupApp.looks);
 	});
 };
 
