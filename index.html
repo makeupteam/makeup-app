@@ -55,7 +55,7 @@
 
 <body>
 
-    <div class="wrapper">
+    <div class="home disable-buttons">
         <header>
             <h1>Makeup Trendz</h1>
             <button>My Wishlist</button>
@@ -91,16 +91,16 @@
         </footer>
     </div>
 
-    <div class="details-view clearfix hidden">
-        <div class="look-details">
-            <div class="look-info-container">
+    <div class="look-details view clearfix hidden">
+        <div class="look-section">
+            <div class="look-info">
                 <div class="look-img-cell"><img src=""></div>
                 <h2 class="look-name"></h1>
                 <h3 class="look-likes"></h2>
             </div>
 
-            <div class="pinned-product-section">
-                <h3 class="pinned-product-caption">You have pinned these products from this look</h3>
+            <div class="pinned-products">
+                <h3 class="pinned-products__caption">You have pinned these products from this look</h3>
                 <div class="main-carousel" data-flickity='{ "cellSelector": ".carousel-cell" }'>
                     <!-- wishlist carousel template, to be removed -->
 
@@ -148,7 +148,7 @@
         </div>
     </div>
 
-    <div class="master-wishlist view">
+    <div class="master-wishlist view hidden">
     <!-- wishlist template - to be removed -->
         <div class="wishlist-cell">
             <div class="wishlist-look-cell"><img src=""></div>

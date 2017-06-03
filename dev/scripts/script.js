@@ -21,7 +21,7 @@ makeupApp.init = function() {
 	// make API call to fetch products data
 	makeupApp.getProductData();
 
-	// load firebase data
+	// meanwhile load firebase data
 	looksDB.once('value', function(res) {
 		let data = res.val();
 		for (var look in data) {
@@ -29,6 +29,7 @@ makeupApp.init = function() {
 		}
 		makeupApp.loadLooks();
 		makeupApp.looksGallerySetup();
+		makeupApp.detailViewSetup();
 	});
 
 	// setup listeners for main page
@@ -48,11 +49,11 @@ makeupApp.getProductData = function() {
 		method: 'GET',
 		dataType: 'json',
 	}).then(function(res) {
+		$('.home').toggleClass('disable-buttons'); // allow interaction with the home view
 		let productResults = res;
 		productResults.forEach(function(result) {
 			makeupApp.products[result.id] = result;
 		});
-		console.log('ajax done')
 	});
 };
 // dynamically add looks-thumbnails to main page gallery
@@ -73,9 +74,27 @@ makeupApp.loadLooks = function() {
 
 		// setup click listener for the look thumbnail
 		templateItem.find('.overlay').on('click', function() {
+			$('.home').toggleClass('disable-buttons'); // prevent accidental interaction with the home view while in look-details view
 			makeupApp.makeDetailedPage(look);
-			$('.details-view').removeClass('hidden');
+			$('.look-details').toggleClass('hidden');
 		});
+	});
+};
+
+makeupApp.detailViewSetup = function () {
+	$('.add-to-wishlist').on('click', function() {
+		$('.master-wishlist').append(`<h1>WHATSUP</h1>`)
+	})
+
+	// exit detail page
+	$('.exit-detail').on('click', function(){
+		$('.look-details').toggleClass('hidden');
+		setTimeout(function() {
+			$('.carousel-cell, .total-value, .products-gallery').empty();
+		    $('.look-img-cell img, .product-image__small').attr('src', '');
+		    $('.dot').remove();
+			$('.home').toggleClass('disable-buttons'); // allow interaction with the home view again
+		}, 300);
 	});
 };
 
@@ -87,22 +106,6 @@ makeupApp.makeDetailedPage = function(look){
 	$('.look-likes').text(look.likes);
 
 	makeupApp.productGallerySetup(look);
-
-	$('.add-to-wishlist').on('click', function() {
-		$('.master-wishlist').append(`<h1>WHATSUP</h1>`)
-	})
-
-	// exit detail page
-	$('.exit-detail').on('click', function(){
-		$('.carousel-cell, .total-value, .products-gallery').empty();
-
-		$('.look-img-cell img, .product-image__small').attr('src', '');
-
-		$('.dot').remove();
-		$('.details-view').addClass('hidden');
-
-
-	});
 };
 
 // to set up the product gallery based on selected look
@@ -148,7 +151,6 @@ makeupApp.productGallerySetup = function (look){
 
 			// send pinned product to master wishlist
 			pinnedItem.push(productInfo.id);
-			console.log(pinnedItem);
 		});
 
 	};
