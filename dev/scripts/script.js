@@ -110,6 +110,7 @@ makeupApp.productGallerySetup = function (look){
 
 	// filling product template with related products based on look selected
 	let totalArr = [];
+	let pinnedItem = [];
 	var productGallery = $('.products-gallery');
 	var productTemplate = $('#product-detail-template').html();
 	for (var product in look.products) {
@@ -126,14 +127,13 @@ makeupApp.productGallerySetup = function (look){
 		// fill in filters based on existing categories
 
 		// populate pinned product carousel
-		let pinnedItem = [];
+		// let pinnedItem = [];
 		var carousel = $('.main-carousel');
 		var carouselTemplate = $('#product-carousel').html();
 		productTemplateItem.find('.add-to-total').on('click', function() {
 			var carouselTemplateItem = $(carouselTemplate);
 			carouselTemplateItem.find('.product-image__small').attr('src', productInfo.image_link);
 			carouselTemplateItem.find('.product-name__small').text(productInfo.name);
-			// carousel.append(carouselTemplateItem);
 			carousel.flickity('prepend',$(carouselTemplateItem))
 			let price = parseInt(productInfo.price);
 			totalArr.unshift(price);
@@ -144,9 +144,10 @@ makeupApp.productGallerySetup = function (look){
 				return acc + value;
 			}, 0);
 			$('.total-value').text(totalValue);
+			$(this).attr("disabled", true);
 
 			// send pinned product to master wishlist
-			pinnedItem.push(product.id);
+			pinnedItem.push(productInfo.id);
 			console.log(pinnedItem);
 		});
 
