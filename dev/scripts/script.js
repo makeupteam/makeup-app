@@ -52,6 +52,7 @@ makeupApp.getProductData = function() {
 		productResults.forEach(function(result) {
 			makeupApp.products[result.id] = result;
 		});
+		console.log('ajax done')
 	});
 };
 // dynamically add looks-thumbnails to main page gallery
@@ -73,6 +74,7 @@ makeupApp.loadLooks = function() {
 		// setup click listener for the look thumbnail
 		templateItem.find('.overlay').on('click', function() {
 			makeupApp.makeDetailedPage(look);
+			$('.details-view').removeClass('hidden');
 		});
 	});
 };
@@ -83,9 +85,32 @@ makeupApp.makeDetailedPage = function(look){
 	$('.look-img-cell img').attr('src', look.imageURL);
 	$('.look-name').text(look.name);
 	$('.look-likes').text(look.likes);
-	let totalArr = [];
+
+	makeupApp.productGallerySetup(look);
+
+	$('.add-to-wishlist').on('click', function() {
+		$('.master-wishlist').append(`<h1>WHATSUP</h1>`)
+	})
+
+	// exit detail page
+	$('.exit-detail').on('click', function(){
+		$('.carousel-cell, .total-value, .products-gallery').empty();
+
+		$('.look-img-cell img, .product-image__small').attr('src', '');
+
+		$('.dot').remove();
+		$('.details-view').addClass('hidden');
+
+
+	});
+};
+
+// to set up the product gallery based on selected look
+makeupApp.productGallerySetup = function (look){
 
 	// filling product template with related products based on look selected
+	let totalArr = [];
+	let pinnedItem = [];
 	var productGallery = $('.products-gallery');
 	var productTemplate = $('#product-detail-template').html();
 	for (var product in look.products) {
@@ -98,26 +123,36 @@ makeupApp.makeDetailedPage = function(look){
 
 		productGallery.append(productTemplateItem);
 
+
 		// fill in filters based on existing categories
-		// click listener for add to wishlist
+
+		// populate pinned product carousel
+		// let pinnedItem = [];
 		var carousel = $('.main-carousel');
 		var carouselTemplate = $('#product-carousel').html();
 		productTemplateItem.find('.add-to-total').on('click', function() {
 			var carouselTemplateItem = $(carouselTemplate);
 			carouselTemplateItem.find('.product-image__small').attr('src', productInfo.image_link);
 			carouselTemplateItem.find('.product-name__small').text(productInfo.name);
-			carousel.append(carouselTemplateItem);
+			carousel.flickity('prepend',$(carouselTemplateItem))
 			let price = parseInt(productInfo.price);
-			totalArr.push(price);
+			totalArr.unshift(price);
 			// console.log(totalArr);
+
 			// calculate total price of pinned item
 			let totalValue = totalArr.reduce(function(acc, value) {
 				return acc + value;
 			}, 0);
 			$('.total-value').text(totalValue);
+			$(this).attr("disabled", true);
+
+			// send pinned product to master wishlist
+			pinnedItem.push(productInfo.id);
+			console.log(pinnedItem);
 		});
-	}
-};
+
+	};
+}
 
 makeupApp.looksGallerySetup = function () {
 	// Set up isotope.js on looks gallery
