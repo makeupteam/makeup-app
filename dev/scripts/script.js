@@ -93,11 +93,63 @@ makeupApp.detailViewSetup = function () {
 			$('.carousel-cell, .total-value, .products-gallery').empty();
 			$('.look-img-cell img, .product-image__small').attr('src', '');
 			$('.product-filters .filter-buttons').empty();
+			$('.products-gallery').isotope('destroy');
 			$('.dot').remove();
 			$('.home').toggleClass('disable-buttons'); // allow interaction with the home view again
 		}, 300);
 	});
+
+	makeupApp.productFilterSetup();
 };
+
+makeupApp.productFilterSetup = function () {
+
+	var productGallery = $('.products-gallery');
+
+	makeupApp.productfilters = {
+		categories: [],
+		brands: []
+	};
+
+	function customFilter() {
+		var match = true;
+		for (var filter in makeupApp.productfilters) {
+			if (makeupApp.productfilters[filter].length > 0) {
+				match = match && $(this).is(makeupApp.productfilters[filter].join(", "));
+			}
+		}
+		return match;
+	};
+
+	$('.product-section .filter-container').on('click', 'button', function (event) {
+		var $target = $(event.currentTarget);
+		var type = $(event.delegateTarget).find("h4").text().toLowerCase();
+
+		$target.toggleClass('is-selected');
+		var isSelected = $target.hasClass('is-selected');
+		var filter = $target.attr('data-filter');
+		if (isSelected) {
+			addFilter(filter, type);
+		} else {
+			removeFilter(filter, type);
+		}
+		// filter isotope
+		productGallery.isotope({ filter: customFilter });
+	});
+
+	function addFilter(filter, type) {
+		if (makeupApp.productfilters[type].indexOf(filter) == -1) {
+			makeupApp.productfilters[type].push(filter);
+		}
+	}
+
+	function removeFilter(filter, type) {
+		var index = makeupApp.productfilters[type].indexOf(filter);
+		if (index != -1) {
+			makeupApp.productfilters[type].splice(index, 1);
+		}
+	}
+}
 
 // building the detailed view based on look selected
 makeupApp.makeDetailedPage = function (look) {
@@ -108,6 +160,7 @@ makeupApp.makeDetailedPage = function (look) {
 
 	makeupApp.productGallerySetup(look);
 };
+
 
 // to set up the product gallery based on selected look
 makeupApp.productGallerySetup = function (look) {
@@ -169,7 +222,7 @@ makeupApp.productGallerySetup = function (look) {
 
 	};
 
-	setupFilters();
+	makeFilterButtons();
 
 	function updateFiltersLists(productInfo) {
 		var productCategory = productInfo.product_type.replace(/ /g, '-');
@@ -184,58 +237,6 @@ makeupApp.productGallerySetup = function (look) {
 		}
 	};
 
-	function setupFilters() {
-		makeFilterButtons();
-
-		productGallery.isotope({
-			itemSelector: '.product-cell'
-		});
-
-		var filters = {
-			categories: [],
-			brands: []
-		};
-
-		function customFilter() {
-			var match = true;
-			for (var filter in filters) {
-				if (filters[filter].length > 0) {
-					match = match && $(this).is(filters[filter].join(", "));
-				}
-			}
-			return match;
-		};
-
-		$('.product-section .filter-container').on('click', 'button', function (event) {
-			var $target = $(event.currentTarget);
-			var type = $(event.delegateTarget).find("h4").text().toLowerCase();
-
-			$target.toggleClass('is-selected');
-			var isSelected = $target.hasClass('is-selected');
-			var filter = $target.attr('data-filter');
-			if (isSelected) {
-				addFilter(filter, type);
-			} else {
-				removeFilter(filter, type);
-			}
-			// filter isotope
-			productGallery.isotope({ filter: customFilter });
-		});
-
-		function addFilter(filter, type) {
-			if (filters[type].indexOf(filter) == -1) {
-				filters[type].push(filter);
-			}
-		}
-
-		function removeFilter(filter, type) {
-			var index = filters[type].indexOf(filter);
-			if (index != -1) {
-				filters[type].splice(index, 1);
-			}
-		}
-	}
-
 	function makeFilterButtons() {
 		var categoryButtons = $('.categories .filter-buttons');
 		var brandButtons = $('.brands .filter-buttons');
@@ -246,6 +247,15 @@ makeupApp.productGallerySetup = function (look) {
 		brandFilters.forEach(function (filter) {
 			brandButtons.append(`<button data-filter=".${filter}">${filter}</button>`)
 		});
+
+		productGallery.isotope({
+			itemSelector: '.product-cell'
+		});
+
+		makeupApp.productfilters = {
+			categories: [],
+			brands: []
+		};
 	}
 }
 
