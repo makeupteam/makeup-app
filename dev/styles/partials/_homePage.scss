@@ -20,6 +20,7 @@ header {
 	margin: 0;
 	padding: 0 1rem;
 	letter-spacing: 0.15rem;
+    outline: 0;
 	&:hover {
 		font-weight: 500;
 		color: $purple;
@@ -63,7 +64,7 @@ header {
     width: 16vw;
     height: 16vw;
     margin-right: 5%;
-	margin-bottom: 5%
+	margin-bottom: 5%;
     position: relative;
     overflow: hidden;
 	&:nth-child(4) {

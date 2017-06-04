@@ -42,7 +42,7 @@ makeupApp.init = function () {
 	});
 };
 
-// AJAX call to apiKey
+// AJAX call to API
 makeupApp.getProductData = function () {
 	$.ajax({
 		url: 'http://makeup-api.herokuapp.com/api/v1/products.json',
@@ -92,6 +92,7 @@ makeupApp.detailViewSetup = function () {
 		setTimeout(function () {
 			$('.carousel-cell, .total-value, .products-gallery').empty();
 			$('.look-img-cell img, .product-image__small').attr('src', '');
+			$('.product-filters .filter-buttons').empty();
 			$('.dot').remove();
 			$('.home').toggleClass('disable-buttons'); // allow interaction with the home view again
 		}, 300);
@@ -171,14 +172,14 @@ makeupApp.productGallerySetup = function (look) {
 	setupFilters();
 
 	function updateFiltersLists(productInfo) {
-		if (categoryFilters.indexOf(productInfo.product_type) == -1) {
-			var productCategory = productInfo.product_type.replace(/ /g, '-');
+		var productCategory = productInfo.product_type.replace(/ /g, '-');
+		if (categoryFilters.indexOf(productCategory) == -1) {
 			categoryFilters.push(productCategory);
 		}
-		if (brandFilters.indexOf(productInfo.brand) == -1) {
-			var productBrand = productInfo.brand.replace(/ /g, '-');
-			productBrand = productBrand.replace(/\./g, '');
-			productBrand = productBrand.replace(/'/g, '');
+		var productBrand = productInfo.brand.replace(/ /g, '-');
+		productBrand = productBrand.replace(/\./g, '');
+		productBrand = productBrand.replace(/'/g, '');
+		if (brandFilters.indexOf(productBrand) == -1) {
 			brandFilters.push(productBrand);
 		}
 	};
