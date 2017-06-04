@@ -8,10 +8,39 @@ body {
 	padding: 0;
 }
 
+.wrapper {
+	max-width: 1080px;
+	margin: 0 auto;
+	padding: 2rem;
+}
+
 h1, h2, h3, h4, h5, h6 {
 	font-family: $headingFont;
 	padding: 0;
 	margin: 0;
+}
+
+h1 {
+	font-weight: 300;
+	color: white;
+	font-size: 3rem;
+	letter-spacing: 1rem;
+	margin: 0 auto;
+	.smallerHead {
+		display: block;
+		font-family: $bodyFont;
+		font-size: 2rem;
+		letter-spacing: 0.5rem;
+	}
+}
+
+header h2 {
+	font-family: $bodyFont;
+	font-style: italic;
+	font-size: 1rem;
+	color: white;
+	font-weight: 300;
+	text-transform: lowercase;
 }
 
 ul {
@@ -25,6 +54,20 @@ img {
 	display: block;
 }
 
+footer {
+	text-align: center;
+	font-family: $bodyFont;
+	color: $white;
+	background: $black;
+	a {
+		color: $hotPink;
+		text-decoration: none;
+		&:hover {
+			color: $white;
+		}
+	}
+}
+
 .view {
     width: 100%;
     height: 100%;
@@ -33,12 +76,12 @@ img {
 }
 
 .hidden {
-    visibility: hidden;
+    // visibility: hidden;
+	display: none;
     opacity: 0;
     transition: visibility 0s linear 0.3s, opacity 0.3s;
 }
 
-
-
-
-
+.disable-buttons {
+    pointer-events: none;
+}

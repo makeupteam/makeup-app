@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.css">
     <link rel="stylesheet" href="public/styles/styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Oswald:300,500|Roboto:300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,500|Roboto:300,300i,400,400i" rel="stylesheet">
 
     <!-- Template for look photo gallery on home page -->
     <script type="text/template" id="look-template">
@@ -55,52 +55,61 @@
 
 <body>
 
-    <div class="wrapper">
+    <div class="home disable-buttons">
         <header>
-            <h1>Makeup Trendz</h1>
-            <button>My Wishlist</button>
+			<div class="wrapper">
+				<div class="headerText">
+		            <h1><span class="smallerHead">the</span> beauty log</h1>
+					<h2>The only beauty advice you need</h2>
+				</div>
+	            <button>My Wishlist</button>
+			</div>
         </header>
 
         <main>
-            <div class="gallery-options">
-                <div class="option-container">
-                    <div class="filter-container">
-                        <button data-filter= "*">All</button>
-                        <button data-filter= ".eyes">Eyes</button>
-                        <button data-filter= ".lips">Lips</button>
-                        <button data-filter= ".contour">Contour</button>
-                        <button data-filter= ".fullFace">Full-face</button>
-                     </div>
-                </div>
+			<div class="wrapper">
+	            <div class="gallery-options clearfix">
+	                <div class="option-container">
+	                    <div class="filter-container">
+	                        <button data-filter= "*">All</button>
+	                        <button data-filter= ".eyes">Eyes</button>
+	                        <button data-filter= ".lips">Lips</button>
+	                        <button data-filter= ".contour">Contour</button>
+	                        <button data-filter= ".fullFace">Full-face</button>
+	                     </div>
+	                </div>
 
-                <div class="option-container">
-                    <label for="sort">Sort By:</label>
-                    <select name="sort" id="looks-sort">
-                        <option value="popular">Most Popular</option>
-                        <option value="newest">Newest To Oldest</option>
-                        <option value="oldest">Oldest to Newest</option>
-                    </select>
-                </div>
-            </div>
+	                <div class="option-container">
+	                    <label for="sort">Sort By</label>
+	                    <select name="sort" id="looks-sort">
+	                        <option value="popular">Popularity</option>
+	                        <option value="newest">Newest To Oldest</option>
+	                        <option value="oldest">Oldest to Newest</option>
+	                    </select>
+	                </div>
+	            </div>
 
-            <div class="looks-gallery"></div>
+	            <div class="looks-gallery"></div>
+			</div>
         </main>
 
         <footer>
-            <p>Website built by: Sonny, Irene, Kait, Robin</p>
+			<div class="wrapper">
+	            <p>Website built by <a href="https://twitter.com/sonnyzhang_" target="_blank">Sonny</a>, <a href="https://twitter.com/irenezou93" target="_blank">Irene</a>, <a href="https://twitter.com/ktsyks" target="_blank">Kait</a>, and <a href="https://twitter.com/rdubcodes" target="_blank">Robin</a>.</p>
+			</div>
         </footer>
     </div>
 
-    <div class="details-view clearfix hidden">
-        <div class="look-details">
-            <div class="look-info-container">
+    <div class="look-details view clearfix hidden">
+        <div class="look-section">
+            <div class="look-info">
                 <div class="look-img-cell"><img src=""></div>
                 <h2 class="look-name"></h1>
                 <h3 class="look-likes"></h2>
             </div>
 
-            <div class="pinned-product-section">
-                <h3 class="pinned-product-caption">You have pinned these products from this look</h3>
+            <div class="pinned-products">
+                <h3 class="pinned-products__caption">You have pinned these products from this look</h3>
                 <div class="main-carousel" data-flickity='{ "cellSelector": ".carousel-cell" }'>
                     <!-- wishlist carousel template, to be removed -->
 
@@ -148,7 +157,7 @@
         </div>
     </div>
 
-    <div class="master-wishlist view">
+    <div class="master-wishlist view hidden">
     <!-- wishlist template - to be removed -->
         <div class="wishlist-cell">
             <div class="wishlist-look-cell"><img src=""></div>
