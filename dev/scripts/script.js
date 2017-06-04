@@ -83,8 +83,6 @@ makeupApp.loadLooks = function () {
 					$(`#likes-cell-${look.id} .like-number`).text(look.likes);
 					$(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/heart.png');
 				});
-
-
 			} else {
 				console.log('increment this counter')
 				looksDB.update({//updates the DB with
