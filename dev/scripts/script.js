@@ -104,7 +104,7 @@ makeupApp.getProductData = function () {
 		});
 		$('.loader-container').fadeOut();
 		makeupApp.collapseHero();
-		makeupApp.fadeInHomePage();
+		// makeupApp.fadeInHomePage();
 	});
 };
 
