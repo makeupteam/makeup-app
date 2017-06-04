@@ -305,7 +305,11 @@ makeupApp.looksGallerySetup = function () {
 		itemSelector: '.look-cell',
 		stagger: 10,
 		getSortData: { 
-			popular: '.like-number',
+	        popular: function( itemElem ) { // function
+	          var likes = $( itemElem ).find('.like-number').text();
+	          return parseInt(likes); 
+	        },
+	        // popular: '.like-number',
 			newest: function( itemElem ) { // function
 		      var orderAdded = $( itemElem ).attr('data-order-added')
 		      return parseInt(orderAdded); 
@@ -313,11 +317,6 @@ makeupApp.looksGallerySetup = function () {
 	    	oldest: function( itemElem ) { // function
 	          var orderAdded = $( itemElem ).attr('data-order-added')
 	          return parseInt(orderAdded); 
-	        },
-	        popular: function( itemElem ) { // function
-	          var likes = $( itemElem ).find('.like-number').text();
-	          console.log(likes);
-	          return parseInt(likes); 
 	        }
 
 		}
@@ -367,7 +366,7 @@ makeupApp.looksGallerySetup = function () {
 
 	$('#looks-sort').on('change', function () {
 		var sortValue = $(this).val();
-		var ascending = sortOrder(sortValue)
+		var ascending = sortOrder(sortValue);
 		looksGallery.isotope({
 			sortBy: sortValue,
 			sortAscending: ascending		
