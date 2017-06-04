@@ -22,6 +22,62 @@ makeupApp.init = function () {
 	makeupApp.getProductData();
 	// $('.home').toggleClass('disable-buttons');
 
+	// // meanwhile load firebase data and then set up views
+	// looksDB.once('value', function (res) {
+	// 	let data = res.val();
+	// 	for (var look in data) {
+	// 		makeupApp.looks.push(data[look]);
+	// 	}
+	// 	makeupApp.loadLooks();
+	// 	makeupApp.looksGallerySetup();
+	// 	makeupApp.detailViewSetup();
+	// });
+
+	// // setup listeners for main page
+	// $('#looks-filter').on('change', function () {
+	// 	let filter = $(this).val();
+	// });
+
+	// $('#looks-sort').on('change', function () {
+	// 	let sort = $(this).val();
+	// });
+};
+
+
+
+// AJAX call to API
+makeupApp.getProductData = function () {
+	$.ajax({
+		url: 'http://makeup-api.herokuapp.com/api/v1/products.json',
+		method: 'GET',
+		dataType: 'json',
+	}).then(function (res) {
+		$('.home').toggleClass('disable-buttons'); // allow interaction with the home view
+		let productResults = res;
+		productResults.forEach(function (result) {
+			makeupApp.products[result.id] = result;
+		});
+		$('.loader-container').fadeOut();
+		makeupApp.collapseHero();
+		makeupApp.fadeInHomePage();
+	});
+};
+
+// collapse hero once ajax call is done
+makeupApp.collapseHero = function() {
+	$('header').css({
+		'height': '35vh'
+		// 'margin-top': '20vh'
+	});
+	$('.header-content').css({
+		'transform': 'scale(1.0)',
+		'margin-top': '25vh',
+		'margin-bottom': '10vh'
+	})
+}
+
+// load homepage when ajax call is done
+makeupApp.fadeInHomePage = function() {
 	// meanwhile load firebase data and then set up views
 	looksDB.once('value', function (res) {
 		let data = res.val();
@@ -41,22 +97,7 @@ makeupApp.init = function () {
 	$('#looks-sort').on('change', function () {
 		let sort = $(this).val();
 	});
-};
-
-// AJAX call to API
-makeupApp.getProductData = function () {
-	$.ajax({
-		url: 'http://makeup-api.herokuapp.com/api/v1/products.json',
-		method: 'GET',
-		dataType: 'json',
-	}).then(function (res) {
-		$('.home').toggleClass('disable-buttons'); // allow interaction with the home view
-		let productResults = res;
-		productResults.forEach(function (result) {
-			makeupApp.products[result.id] = result;
-		});
-	});
-};
+}
 // dynamically add looks-thumbnails to main page gallery
 makeupApp.loadLooks = function () {
 	var looksGallery = $('.looks-gallery');
