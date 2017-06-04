@@ -303,13 +303,12 @@ makeupApp.looksGallerySetup = function () {
 	// Set up isotope.js on looks gallery
 	var looksGallery = $('.looks-gallery').isotope({
 		itemSelector: '.look-cell',
-		stagger: 10,
+		layoutMode: 'fitRows',
 		getSortData: { 
 	        popular: function( itemElem ) { // function
 	          var likes = $( itemElem ).find('.like-number').text();
 	          return parseInt(likes); 
 	        },
-	        // popular: '.like-number',
 			newest: function( itemElem ) { // function
 		      var orderAdded = $( itemElem ).attr('data-order-added')
 		      return parseInt(orderAdded); 
