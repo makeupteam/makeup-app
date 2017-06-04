@@ -20,6 +20,7 @@ makeupApp.products = [];
 makeupApp.init = function () {
 	// make API call to fetch products data
 	makeupApp.getProductData();
+	// $('.home').toggleClass('disable-buttons');
 
 	// meanwhile load firebase data and then set up views
 	looksDB.once('value', function (res) {
@@ -72,30 +73,40 @@ makeupApp.loadLooks = function () {
 		templateItem.find('.like-number').text(look.likes);
 		templateItem.find('.like-button').on('click', function () {//selects template item
 			//find the like button, on click, function runs
-			looksDB.update({//updates the DB with
-				[`look${look.id}`]: Object.assign({}, look, {
-					//corresponding look thats being clicked, goes into DB
-					//assigns all previous values and updating likes value
-					likes: look.likes += 1,
-					//update is being sent to DB
+			if ( $(`#likes-cell-${look.id} .like-button`).hasClass('liked') ) {
+				console.log('decrement this counter')
+				looksDB.update({//updates the DB with
+					[`look${look.id}`]: Object.assign({}, look, {
+						//corresponding look thats being clicked, goes into DB
+						//assigns all previous values and updating likes value
+						likes: look.likes -= 1,
+						//update is being sent to DB
+					})
 				})
-			})
-			.then(function() {
-				$(`#likes-cell-${look.id} .like-number`).text(look.likes);
-				$('.like-icon').removeAttr('src');
-				// $(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/filled_heart.png');
-
-			});
-
+				.then(function() {
+					$(`#likes-cell-${look.id} .like-number`).text(look.likes);
+					$(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/heart.png');
 				});
 
-		templateItem.find(`#likes-box-${look.id} .liked`).on('click', makeupApp.likeToggle);
+			} else {
+				console.log('increment this counter')
+				looksDB.update({//updates the DB with
+					[`look${look.id}`]: Object.assign({}, look, {
+						//corresponding look thats being clicked, goes into DB
+						//assigns all previous values and updating likes value
+						likes: look.likes += 1,
+						//update is being sent to DB
+					})
+				})
+				.then(function() {
+					$(`#likes-cell-${look.id} .like-number`).text(look.likes);
+					$(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/filled_heart.png');
+				});
+			}
 
-		// find the appropraite like button and fill in the heart
-		$(".like-button").click(function(){
-		  $(this).toggleClass("is-active");
+			$(`#likes-cell-${look.id} .like-button`).toggleClass('liked')
+
 		});
-		//CSS .is-active{ background:pink;}
 
 		// append info to DOM
 		looksGallery.append(templateItem);
@@ -108,7 +119,6 @@ makeupApp.loadLooks = function () {
 		});
 	});
 };
-
 
 makeupApp.detailViewSetup = function () {
 	$('.add-to-wishlist').on('click', function () {
