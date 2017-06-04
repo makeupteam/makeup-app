@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="public/styles/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,500|Roboto:300,300i,400,400i" rel="stylesheet">
 
-    <!-- Template for look photo gallery on home page -->
+    <!-- Template for looks gallery on home page -->
     <script type="text/template" id="look-template">
         <div class="look-cell">
             <button class="overlay">
@@ -67,30 +67,33 @@
         </header>
 
         <main>
-			<div class="wrapper">
-	            <div class="gallery-options clearfix">
-	                <div class="option-container">
-	                    <div class="filter-container">
-	                        <button data-filter= "*">All</button>
-	                        <button data-filter= ".eyes">Eyes</button>
-	                        <button data-filter= ".lips">Lips</button>
-	                        <button data-filter= ".contour">Contour</button>
-	                        <button data-filter= ".fullFace">Full-face</button>
-	                     </div>
-	                </div>
 
-	                <div class="option-container">
-	                    <label for="sort">Sort By</label>
-	                    <select name="sort" id="looks-sort">
-	                        <option value="popular">Popularity</option>
-	                        <option value="newest">Newest To Oldest</option>
-	                        <option value="oldest">Oldest to Newest</option>
-	                    </select>
-	                </div>
-	            </div>
+      <div class="wrapper">
+            <div class="gallery-options">
+                <div class="option-container">
+                    <span>Filter By:</span>
+                    <div class="filter-container">
+                        <button data-filter="*">All</button>
+                        <button data-filter=".eyes">Eyes</button>
+                        <button data-filter=".lips">Lips</button>
+                        <button data-filter=".contour">Contour</button>
+                        <button data-filter=".fullFace">Full-face</button>
+                    </div>
+                </div>
 
-	            <div class="looks-gallery"></div>
-			</div>
+                <div class="option-container">
+                    <label for="sort">Sort By:</label>
+                    <select name="sort" id="looks-sort">
+                        <option value="popular">Most Popular</option>
+                        <option value="newest">Newest To Oldest</option>
+                        <option value="oldest">Oldest to Newest</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="looks-gallery"></div>
+        </div>
+
         </main>
 
         <footer>
@@ -104,8 +107,8 @@
         <div class="look-section">
             <div class="look-info">
                 <div class="look-img-cell"><img src=""></div>
-                <h2 class="look-name"></h1>
-                <h3 class="look-likes"></h2>
+                <h2 class="look-name"></h2>
+                <h3 class="look-likes"></h3>
             </div>
 
             <div class="pinned-products">
@@ -120,45 +123,37 @@
         </div>
 
         <div class="product-section">
-            <div class="filter">
-                <div class="category-filter">
-                    <h4 class="filter-title">Category</h4>
-                    <div class="categories">
-                        <!-- category template: to be removed -->
-                        <div class="options">
-                            <input type="checkbox" id="" value="" name="categories">
-                            <label for=""><span></span></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="brand-filter">
-                    <div class="brands">
-                        <!-- category template: to be removed -->
-                        <div class="options">
-                            <input type="checkbox" id="" value="" name="brands">
-                            <label for=""><span></span></label>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- category template: to be removed -->
-                <div class="price-slider">
-                    <div class="slider-range"></div>
-                    <span class="lower-end"></span>
-                    <span class="higher-end"></span>
-                </div>
-            </div>
             <button class="exit-detail">BACK</button>
-            <div class="products-gallery">
-                <!-- template for product gallery - to be removed -->
+            <div class="product-filters">
 
+                <div class="categories filter-container">
+                    <h4 class="filter-title">Categories</h4>
+                    <div class="filter-buttons">
+
+                    </div>
+                </div>
+
+                <div class="brands filter-container">
+                    <h4 class="filter-title">Brands</h4>
+                    <div class="filter-buttons">
+
+                    </div>
+                </div>
+
+                <!-- to be finished -->
+                <div class="price"> 
+                    <h4 class="filter-title">Price</h4>
+                </div>
+
+            </div>
+            <div class="products-gallery">
 
             </div>
         </div>
     </div>
 
     <div class="master-wishlist view hidden">
-    <!-- wishlist template - to be removed -->
+        <!-- wishlist template - to be removed -->
         <div class="wishlist-cell">
             <div class="wishlist-look-cell"><img src=""></div>
             <div class="wishlist-product-list">
@@ -166,10 +161,10 @@
         </div>
     </div>
 
-	<script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-	<script src='public/scripts/script.js'></script>
+    <script src='public/scripts/script.js'></script>
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.js"></script>
 </body>
 

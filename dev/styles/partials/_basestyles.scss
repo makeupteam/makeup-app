@@ -85,3 +85,9 @@ footer {
 .disable-buttons {
     pointer-events: none;
 }
+
+button.is-selected {
+		font-weight: 500;
+		color: $purple;
+}
+
