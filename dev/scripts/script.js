@@ -21,7 +21,7 @@ makeupApp.init = function () {
 	// make API call to fetch products data
 	makeupApp.getProductData();
 
-	// meanwhile load firebase data
+	// meanwhile load firebase data and then set up views
 	looksDB.once('value', function (res) {
 		let data = res.val();
 		for (var look in data) {
@@ -61,7 +61,7 @@ makeupApp.loadLooks = function () {
 	var looksGallery = $('.looks-gallery');
 	var lookTemplate = $('#look-template').html();
 	makeupApp.looks.forEach(function (look) {
-		var templateItem = $(lookTemplate);//magic
+		var templateItem = $(lookTemplate);
 
 		// fill the template with the look's info
 		templateItem.find('.look-type').text(look.lookType);
@@ -116,21 +116,35 @@ makeupApp.productGallerySetup = function (look) {
 	let pinnedItem = [];
 	var productGallery = $('.products-gallery');
 	var productTemplate = $('#product-detail-template').html();
-	for (var product in look.products) {
-		let productInfo = makeupApp.products[look.products[product]];
 
+	var categoryFilters = [];
+	var brandFilters = [];
+
+	for (var productID in look.products) {
+		let productInfo = makeupApp.products[look.products[productID]];
 		var productTemplateItem = $(productTemplate);
+
 		productTemplateItem.find('.product-img-cell img').attr('src', productInfo.image_link);
 		productTemplateItem.find('.product-price').text(productInfo.price);
 		productTemplateItem.find('.product-name').text(productInfo.name);
 
+		// set up classes for filtering
+		var productType = productInfo.product_type;
+		productType = productType.replace(/ /g, '-');
+		var productBrand = productInfo.brand;
+		productBrand = productBrand.replace(/ /g, '-');
+		productBrand = productBrand.replace(/\./g, '');
+		productBrand = productBrand.replace(/'/g, '');
+
+		productTemplateItem.addClass(`${productType}`);
+		productTemplateItem.addClass(`${productBrand}`);
+
 		productGallery.append(productTemplateItem);
 
-
-		// fill in filters based on existing categories
+		// build the list of filters needed to be displayed
+		updateFiltersLists(productInfo);
 
 		// populate pinned product carousel
-		// let pinnedItem = [];
 		var carousel = $('.main-carousel');
 		var carouselTemplate = $('#product-carousel').html();
 		productTemplateItem.find('.add-to-total').on('click', function () {
@@ -140,7 +154,6 @@ makeupApp.productGallerySetup = function (look) {
 			carousel.flickity('prepend', $(carouselTemplateItem))
 			let price = parseInt(productInfo.price);
 			totalArr.unshift(price);
-			// console.log(totalArr);
 
 			// calculate total price of pinned item
 			let totalValue = totalArr.reduce(function (acc, value) {
@@ -154,7 +167,87 @@ makeupApp.productGallerySetup = function (look) {
 		});
 
 	};
+
+	setupFilters();
+
+	function updateFiltersLists(productInfo) {
+		if (categoryFilters.indexOf(productInfo.product_type) == -1) {
+			var productCategory = productInfo.product_type.replace(/ /g, '-');
+			categoryFilters.push(productCategory);
+		}
+		if (brandFilters.indexOf(productInfo.brand) == -1) {
+			var productBrand = productInfo.brand.replace(/ /g, '-');
+			productBrand = productBrand.replace(/\./g, '');
+			productBrand = productBrand.replace(/'/g, '');
+			brandFilters.push(productBrand);
+		}
+	};
+
+	function setupFilters() {
+		makeFilterButtons();
+
+		productGallery.isotope({
+			itemSelector: '.product-cell'
+		});
+
+		var filters = {
+			categories: [],
+			brands: []
+		};
+
+		function customFilter() {
+			var match = true;
+			for (var filter in filters) {
+				if (filters[filter].length > 0) {
+					match = match && $(this).is(filters[filter].join(", "));
+				}
+			}
+			return match;
+		};
+
+		$('.product-section .filter-container').on('click', 'button', function (event) {
+			var $target = $(event.currentTarget);
+			var type = $(event.delegateTarget).find("h4").text().toLowerCase();
+
+			$target.toggleClass('is-selected');
+			var isSelected = $target.hasClass('is-selected');
+			var filter = $target.attr('data-filter');
+			if (isSelected) {
+				addFilter(filter, type);
+			} else {
+				removeFilter(filter, type);
+			}
+			// filter isotope
+			productGallery.isotope({ filter: customFilter });
+		});
+
+		function addFilter(filter, type) {
+			if (filters[type].indexOf(filter) == -1) {
+				filters[type].push(filter);
+			}
+		}
+
+		function removeFilter(filter, type) {
+			var index = filters[type].indexOf(filter);
+			if (index != -1) {
+				filters[type].splice(index, 1);
+			}
+		}
+	}
+
+	function makeFilterButtons() {
+		var categoryButtons = $('.categories .filter-buttons');
+		var brandButtons = $('.brands .filter-buttons');
+
+		categoryFilters.forEach(function (filter) {
+			categoryButtons.append(`<button data-filter=".${filter}">${filter}</button>`)
+		});
+		brandFilters.forEach(function (filter) {
+			brandButtons.append(`<button data-filter=".${filter}">${filter}</button>`)
+		});
+	}
 }
+
 
 makeupApp.looksGallerySetup = function () {
 	// Set up isotope.js on looks gallery
@@ -163,7 +256,7 @@ makeupApp.looksGallerySetup = function () {
 		stagger: 10
 	});
 
-	var filterButtons = $('.filter-container');
+	var filterButtons = $('main .filter-container');
 	var filters = [];
 
 	// Set up click listener for filter buttons
