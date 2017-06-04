@@ -8,6 +8,7 @@ header {
 	padding-top: 4rem;
 	.headerText {
 		margin: 0 auto;
+		width: 40%;
 	}
 }
 
@@ -99,23 +100,27 @@ header {
             font-weight: 700;
             letter-spacing: 4px;
         }
+    }
 	.photo-cell {
 		height: 100%;
+		width: 100%;
 		overflow: hidden;
 		img {
 			height: 100%;
-			width: auto;
+			width: 100%;
+			overflow: hidden;
 		}
 	}
-    }
     .likes-cell{
         position: absolute;
         right: 0;
         bottom: 0;
-        width: 80px;
+        width: 100px;
         height: 45px;
         background-color: rgba(0,0,0,0.3);
         transition: all 0.3s;
+		text-align: right;
+		padding-right: 1rem;
         button{
             height: 45px;
             cursor: pointer;

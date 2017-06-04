@@ -86,34 +86,16 @@ makeupApp.loadLooks = function () {
 				// $(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/filled_heart.png');
 
 			});
-			
+
 				});
 
 		templateItem.find(`#likes-box-${look.id} .liked`).on('click', makeupApp.likeToggle);
-			
 
-
-			// TO DO
-			// IF heart is filled in, decrement from database and remove class 
-			obj.toggleLikes = function() {
-			  if (classExsts) {
-			   decrement and remove class
-			  } else {
-			   increment and add class
-			 }
-			}
-
-
-
-			//					======
-			//TO DO
-			// find the appropraite like button and fill in the heart
-			$(".like-button").click(function(){
-			  $(this).toggleClass("is-active");
-			});
-			//CSS .is-active{ background:pink;}
-			//					======
-		
+		// find the appropraite like button and fill in the heart
+		$(".like-button").click(function(){
+		  $(this).toggleClass("is-active");
+		});
+		//CSS .is-active{ background:pink;}
 
 		// append info to DOM
 		looksGallery.append(templateItem);
@@ -126,15 +108,6 @@ makeupApp.loadLooks = function () {
 		});
 	});
 };
-
-
-// on makeupApp.liketoggle we want to do 2 things
-	// 1. decrease like number by 1
-	// 2. change filled heart to hollow
-
-makeupApp.liketoggle = function() {
-	if ( $(`.likes-cell `))
-}
 
 
 makeupApp.detailViewSetup = function () {
