@@ -1,15 +1,152 @@
+
+
+
 .home {
     background: url("../../assets/brush.png");
     background-size: contain;
+    background-position: top;
     background-repeat: no-repeat;
 }
 
+
+
 header {
-    padding-top: 4rem;
-    .headerText {
-        margin: 0 auto;
-        width: 40%;
+    position: relative;
+
+    height: 100vh;
+    padding-top: 5rem;
+    .header-content {
+
+        width: 100%;
+        position: relative;
+        transform: scale(1.4);
+        transition: all 1.0s;
+        #left-bracket {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #right-bracket {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+        .headerText {
+            margin: 0 auto;
+            width: 400px;
+            h1 {
+                font-size: 70px;
+                letter-spacing: 20px;
+                span {
+                    font-size: 34px;
+                    letter-spacing: 10px;
+                    line-height: 0;
+                }
+            }
+            h2 {
+                text-align: right;
+                margin-top: 20px;
+                font-size: 16px;
+                font-weight: 300;
+                font-family: $bodyFont;
+                letter-spacing: 2px;
+                color: white;
+            }
+        }
     }
+    .master-wishlist {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}
+
+
+// LOADING ANIMATION
+$animationLength: 1.5s;
+$animationRadius: 25px;
+$dotSize: 16px;
+
+.loader-container {
+    margin-top: 80vh;
+}
+
+.loader {
+    position: relative;
+    width: $animationRadius * 3 + $dotSize;
+    height: $dotSize;
+    margin: $animationRadius auto;
+}
+
+.dot {
+    display: inline-block;
+    width: $dotSize;
+    height: $dotSize;
+    border-radius: $dotSize * 0.5;
+    background: #ccc;
+    position: absolute;
+}
+
+.dot_1 {
+    animation: animateDot1 $animationLength linear infinite;
+    left: $animationRadius;
+    background: #E5A1B3;
+}
+
+.dot_2 {
+    animation: animateDot2 $animationLength linear infinite;
+    animation-delay: $animationLength / 3;
+    left: $animationRadius * 2;
+}
+
+.dot_3 {
+    animation: animateDot3 $animationLength linear infinite;
+    left: $animationRadius;
+}
+
+.dot_4 {
+    animation: animateDot4 $animationLength linear infinite;
+    animation-delay: $animationLength / 3;
+    left: $animationRadius * 2;
+}
+
+@keyframes animateDot1 {
+    0%{ transform: rotate(0deg) translateX(-$animationRadius); }
+    25% { transform: rotate(180deg) translateX(-$animationRadius); }
+    75% { transform: rotate(180deg) translateX(-$animationRadius); }
+    100% { transform: rotate(360deg) translateX(-$animationRadius); }
+}
+
+@keyframes animateDot2 {
+    0%{ transform: rotate(-0deg) translateX(-$animationRadius); }
+    25% { transform: rotate(-180deg) translateX(-$animationRadius); }
+    75% { transform: rotate(-180deg) translateX(-$animationRadius); }
+    100% { transform: rotate(-360deg) translateX(-$animationRadius); }
+}
+
+@keyframes animateDot3 {
+    0%{ transform: rotate(0deg) translateX($animationRadius); }
+    25% { transform: rotate(180deg) translateX($animationRadius); }
+    75% { transform: rotate(180deg) translateX($animationRadius); }
+    100% { transform: rotate(360deg) translateX($animationRadius); }
+}
+
+@keyframes animateDot4 {
+    0%{ transform: rotate(-0deg) translateX($animationRadius); }
+    25% { transform: rotate(-180deg) translateX($animationRadius); }
+    75% { transform: rotate(-180deg) translateX($animationRadius); }
+    100% { transform: rotate(-360deg) translateX($animationRadius); }
+}
+
+.header-wrapper {
+    width: 580px;
+    margin: 0 auto;
+    // border: 1px solid red;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }
 
 .filter-container button {
