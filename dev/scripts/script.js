@@ -52,6 +52,7 @@ makeupApp.getProductData = function () {
 	}).then(function (res) {
 		$('.home').toggleClass('disable-buttons'); // allow interaction with the home view
 		let productResults = res;
+		console.log('api ready');
 		productResults.forEach(function (result) {
 			makeupApp.products[result.id] = result;
 		});
@@ -118,6 +119,10 @@ makeupApp.loadLooks = function () {
 			$('.home').toggleClass('disable-buttons'); // prevent accidental interaction with the home view while in look-details view
 			makeupApp.makeDetailedPage(look);
 			$('.look-details').toggleClass('hidden');
+			$('body').css({
+				'max-height': '100vh',
+				'overflow': 'hidden'
+				});
 		});
 	});
 };
