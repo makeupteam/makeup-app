@@ -194,7 +194,7 @@ $dotSize: 16px;
 }
 
 .looks-gallery{
-    // width: 80vw;
+    width: 80vw;
 }
 
 .look-cell {
@@ -205,9 +205,6 @@ $dotSize: 16px;
     margin-bottom: 5%;
     position: relative;
     overflow: hidden;
-    &:nth-child(4) {
-        margin-right: 0;
-    }
     .overlay{
         position: absolute;
         background-color: rgba(0,0,0,0.3);
