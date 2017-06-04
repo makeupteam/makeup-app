@@ -1,5 +1,61 @@
+.home {
+	background: url("../../assets/brush.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+header {
+	padding-top: 4rem;
+	.headerText {
+		margin: 0 auto;
+	}
+}
+
+.filter-container button {
+	border: none;
+	background: none;
+	font-family: $headingFont;
+	font-weight: 300;
+	text-transform: lowercase;
+	margin: 0;
+	padding: 0 1rem;
+	letter-spacing: 0.15rem;
+	&:hover {
+		font-weight: 500;
+		color: $purple;
+	}
+}
+
+.option-container {
+	font-family: $headingFont;
+	font-weight: 300;
+	text-transform: lowercase;
+	float: left;
+	width: 50%;
+	&:last-child {
+		text-align: right;
+	}
+	label {
+		font-weight: 500;
+		text-transform: uppercase;
+		color: $purple;
+		padding-right: 1rem;
+	}
+	select {
+		background: none;
+		border: none;
+		margin: 0;
+		padding: 0;
+		font-weight: 300;
+	}
+}
+
+.gallery-options {
+	margin: 1rem 0;
+}
+
 .looks-gallery{
-    width: 80vw;
+    // width: 80vw;
 }
 
 .look-cell {
@@ -7,9 +63,12 @@
     width: 16vw;
     height: 16vw;
     margin-right: 5%;
-    border: 1px solid lightsalmon;
+	margin-bottom: 5%
     position: relative;
     overflow: hidden;
+	&:nth-child(4) {
+		margin-right: 0;
+	}
     .overlay{
         position: absolute;
         background-color: rgba(0,0,0,0.3);
@@ -39,6 +98,14 @@
             font-weight: 700;
             letter-spacing: 4px;
         }
+	.photo-cell {
+		height: 100%;
+		overflow: hidden;
+		img {
+			height: 100%;
+			width: auto;
+		}
+	}
     }
     .likes-cell{
         position: absolute;
@@ -84,4 +151,3 @@
 .like-button:focus{
     outline: 0;
 }
-

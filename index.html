@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.css">
     <link rel="stylesheet" href="public/styles/styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Oswald:300,500|Roboto:300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,500|Roboto:300,300i,400,400i" rel="stylesheet">
 
     <!-- Template for looks gallery on home page -->
     <script type="text/template" id="look-template">
@@ -57,11 +57,18 @@
 
     <div class="home disable-buttons">
         <header>
-            <h1>Makeup Trendz</h1>
-            <button>My Wishlist</button>
+			<div class="wrapper">
+				<div class="headerText">
+		            <h1><span class="smallerHead">the</span> beauty log</h1>
+					<h2>The only beauty advice you need</h2>
+				</div>
+	            <button>My Wishlist</button>
+			</div>
         </header>
 
         <main>
+
+      <div class="wrapper">
             <div class="gallery-options">
                 <div class="option-container">
                     <span>Filter By:</span>
@@ -85,10 +92,14 @@
             </div>
 
             <div class="looks-gallery"></div>
+        </div>
+
         </main>
 
         <footer>
-            <p>Website built by: Sonny, Irene, Kait, Robin</p>
+			<div class="wrapper">
+	            <p>Website built by <a href="https://twitter.com/sonnyzhang_" target="_blank">Sonny</a>, <a href="https://twitter.com/irenezou93" target="_blank">Irene</a>, <a href="https://twitter.com/ktsyks" target="_blank">Kait</a>, and <a href="https://twitter.com/rdubcodes" target="_blank">Robin</a>.</p>
+			</div>
         </footer>
     </div>
 
