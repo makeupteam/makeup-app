@@ -74,7 +74,6 @@ makeupApp.loadLooks = function () {
 		templateItem.find('.like-number').text(look.likes);
 		templateItem.find('.like-button').on('click', function () {//selects template item
 			//find the like button, on click, function runs
-			console.log(look.id);
 			if ( $(`#likes-cell-${look.id} .like-button`).hasClass('liked') ) {
 				console.log('decrement this counter')
 				looksDB.update({//updates the DB with
@@ -85,11 +84,32 @@ makeupApp.loadLooks = function () {
 						//update is being sent to DB
 					})
 				})
+<<<<<<< HEAD
+<<<<<<< HEAD
+			})
+			.then(function() {
+				$(`#likes-cell-${look.id} .like-number`).text(look.likes);
+				$('.like-icon').removeAttr('src');
+				// $(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/filled_heart.png');
+
+			});
+
+				});
+
+		templateItem.find(`#likes-box-${look.id} .liked`).on('click', makeupApp.likeToggle);
+
+		// find the appropraite like button and fill in the heart
+		$(".like-button").click(function(){
+		  $(this).toggleClass("is-active");
+		});
+		//CSS .is-active{ background:pink;}
+=======
+=======
+>>>>>>> bf3313e43dd9a6f8ccc998bcb0881557492f1d60
 				.then(function() {
 					$(`#likes-cell-${look.id} .like-number`).text(look.likes);
 					$(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/heart.png');
 				});
-
 
 			} else {
 				console.log('increment this counter')
@@ -110,6 +130,10 @@ makeupApp.loadLooks = function () {
 			$(`#likes-cell-${look.id} .like-button`).toggleClass('liked')
 
 		});
+<<<<<<< HEAD
+>>>>>>> 8f55a1f34d8d173acaf4eb4f70fa3293be791ed1
+=======
+>>>>>>> bf3313e43dd9a6f8ccc998bcb0881557492f1d60
 
 		// append info to DOM
 		looksGallery.append(templateItem);
@@ -127,9 +151,15 @@ makeupApp.loadLooks = function () {
 	});
 };
 
+<<<<<<< HEAD
+
+<<<<<<< HEAD
+=======
 
 
-
+>>>>>>> 8f55a1f34d8d173acaf4eb4f70fa3293be791ed1
+=======
+>>>>>>> bf3313e43dd9a6f8ccc998bcb0881557492f1d60
 makeupApp.detailViewSetup = function () {
 	$('.add-to-wishlist').on('click', function () {
 		$('.master-wishlist').append(`<h1>WHATSUP</h1>`)
