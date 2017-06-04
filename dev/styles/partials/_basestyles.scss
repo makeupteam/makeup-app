@@ -76,8 +76,8 @@ footer {
 }
 
 .hidden {
-    // visibility: hidden;
-	display: none;
+    visibility: hidden;
+	// display: none;
     opacity: 0;
     transition: visibility 0s linear 0.3s, opacity 0.3s;
 }
@@ -86,7 +86,7 @@ footer {
     pointer-events: none;
 }
 
-button.is-selected {
+.filter-container button.is-selected {
 		font-weight: 500;
 		color: $purple;
 }
