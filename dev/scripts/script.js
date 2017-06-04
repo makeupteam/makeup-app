@@ -102,8 +102,47 @@ makeupApp.getProductData = function () {
 		productResults.forEach(function (result) {
 			makeupApp.products[result.id] = result;
 		});
+		$('.loader-container').fadeOut();
+		makeupApp.collapseHero();
+		makeupApp.fadeInHomePage();
 	});
 };
+
+// collapse hero once ajax call is done
+makeupApp.collapseHero = function() {
+	$('header').css({
+		'height': '35vh'
+		// 'margin-top': '20vh'
+	});
+	$('.header-content').css({
+		'transform': 'scale(1.0)',
+		'margin-top': '25vh',
+		'margin-bottom': '10vh'
+	})
+}
+
+// load homepage when ajax call is done
+makeupApp.fadeInHomePage = function() {
+	// meanwhile load firebase data and then set up views
+	looksDB.once('value', function (res) {
+		let data = res.val();
+		for (var look in data) {
+			makeupApp.looks.push(data[look]);
+		}
+		makeupApp.loadLooks();
+		makeupApp.looksGallerySetup();
+		makeupApp.detailViewSetup();
+	});
+
+	// setup listeners for main page
+	$('#looks-filter').on('change', function () {
+		let filter = $(this).val();
+	});
+
+	$('#looks-sort').on('change', function () {
+		let sort = $(this).val();
+	});
+}
 
 // dynamically add looks-thumbnails to main page gallery
 makeupApp.loadLooks = function () {
@@ -356,18 +395,18 @@ makeupApp.looksGallerySetup = function () {
 	var looksGallery = $('.looks-gallery').isotope({
 		itemSelector: '.look-cell',
 		layoutMode: 'fitRows',
-		getSortData: { 
+		getSortData: {
 	        popular: function( itemElem ) { // function
 	          var likes = $( itemElem ).find('.like-number').text();
-	          return parseInt(likes); 
+	          return parseInt(likes);
 	        },
 			newest: function( itemElem ) { // function
 		      var orderAdded = $( itemElem ).attr('data-order-added')
-		      return parseInt(orderAdded); 
+		      return parseInt(orderAdded);
 		    },
 	    	oldest: function( itemElem ) { // function
 	          var orderAdded = $( itemElem ).attr('data-order-added')
-	          return parseInt(orderAdded); 
+	          return parseInt(orderAdded);
 	        }
 
 		}
@@ -420,7 +459,7 @@ makeupApp.looksGallerySetup = function () {
 		var ascending = sortOrder(sortValue);
 		looksGallery.isotope({
 			sortBy: sortValue,
-			sortAscending: ascending		
+			sortAscending: ascending
 		})
 	});
 
