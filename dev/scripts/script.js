@@ -122,13 +122,10 @@ makeupApp.loadLooks = function () {
 	});
 };
 
-
-
-
 makeupApp.detailViewSetup = function () {
-	$('.add-to-wishlist').on('click', function () {
-		$('.master-wishlist').append(`<h1>WHATSUP</h1>`)
-	})
+	// $('.add-to-wishlist').on('click', function () {
+	// 	$('.master-wishlist').append(`<h1>WHATSUP</h1>`)
+	// })
 
 	// exit detail page
 	$('.exit-detail').on('click', function () {
@@ -211,7 +208,7 @@ makeupApp.productGallerySetup = function (look) {
 
 	// filling product template with related products based on look selected
 	let totalArr = [];
-	let pinnedItem = [];
+	let pinnedItems = [];
 	var productGallery = $('.products-gallery');
 	var productTemplate = $('#product-detail-template').html();
 
@@ -261,9 +258,23 @@ makeupApp.productGallerySetup = function (look) {
 			$(this).attr("disabled", true);
 
 			// send pinned product to master wishlist
-			pinnedItem.push(productInfo.id);
+			pinnedItems.push(productInfo.id);
+			makeupApp.makeWishlistPage(pinnedItems);
 		});
 
+	};
+
+	makeupApp.makeWishlistPage = function (pinnedItems) {
+		let item = pinnedItems;
+		console.log(item);
+		$('.add-to-wishlist').on('click', function() {
+			for (var i = 0; i < pinnedItems.length; i++) {
+				// filling in wishlist based on look selected
+				console.log(makeupApp.products[item[i]].name);
+				// $('.wishlist-look-cell img').attr('src', item.imageURL);
+				$('.wishlist-product-list').append(makeupApp.products[item[i]].name, makeupApp.products[item[i]].price);
+			}
+		});
 	};
 
 	makeFilterButtons();
