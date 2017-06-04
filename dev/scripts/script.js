@@ -69,10 +69,6 @@ makeupApp.loadLooks = function() {
 		templateItem.find('.look-image').attr('src', look.imageURL);
 		templateItem.find('.like-number').text(look.likes);
 		templateItem.find('.like-button').on('click', function () {//selects template item
-			// TO DO
-			// IF heart is filled in, return early exiting the function
-
-
 			//find the like button, on click, function runs
 			looksDB.update({//updates the DB with
 				[`look${look.id}`]: Object.assign({}, look, {
@@ -84,12 +80,38 @@ makeupApp.loadLooks = function() {
 			})
 			.then(function() {
 				$(`#likes-cell-${look.id} .like-number`).text(look.likes);
+				$('.like-icon').removeAttr('src');
+				// $(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/filled_heart.png');
 
-				//TO DO
-				// find the appropraite like button and fill in the heart
 			});
+			
+				});
 
-		});
+		templateItem.find(`#likes-box-${look.id} .liked`).on('click', makeupApp.likeToggle);
+			
+
+
+			// TO DO
+			// IF heart is filled in, decrement from database and remove class 
+			obj.toggleLikes = function() {
+			  if (classExsts) {
+			   decrement and remove class
+			  } else {
+			   increment and add class
+			 }
+			}
+
+
+
+			//					======
+			//TO DO
+			// find the appropraite like button and fill in the heart
+			$(".like-button").click(function(){
+			  $(this).toggleClass("is-active");
+			});
+			//CSS .is-active{ background:pink;}
+			//					======
+		
 
 		// append info to DOM
 		looksGallery.append(templateItem);
@@ -102,6 +124,16 @@ makeupApp.loadLooks = function() {
 		});
 	});
 };
+
+
+// on makeupApp.liketoggle we want to do 2 things
+	// 1. decrease like number by 1
+	// 2. change filled heart to hollow
+
+makeupApp.liketoggle = function() {
+	if ( $(`.likes-cell `))
+}
+
 
 makeupApp.detailViewSetup = function () {
 	$('.add-to-wishlist').on('click', function() {
