@@ -33,14 +33,8 @@ makeupApp.init = function () {
 		makeupApp.detailViewSetup();
 	});
 
-	// setup listeners for main page
-	$('#looks-filter').on('change', function () {
-		let filter = $(this).val();
-	});
-
-	$('#looks-sort').on('change', function () {
-		let sort = $(this).val();
-	});
+	
+	
 };
 
 // AJAX call to API
@@ -69,6 +63,7 @@ makeupApp.loadLooks = function () {
 		templateItem.find('.look-type').text(look.lookType);
 		templateItem.addClass(`${look.filter}`);
 		templateItem.attr('id', `likes-cell-${look.id}`)
+		templateItem.attr('data-order-added', `${look.orderAdded}`)
 		templateItem.find('.look-image').attr('src', look.imageURL);
 		templateItem.find('.like-number').text(look.likes);
 		templateItem.find('.like-button').on('click', function () {//selects template item
@@ -308,8 +303,27 @@ makeupApp.looksGallerySetup = function () {
 	// Set up isotope.js on looks gallery
 	var looksGallery = $('.looks-gallery').isotope({
 		itemSelector: '.look-cell',
-		stagger: 10
+		stagger: 10,
+		getSortData: { 
+			popular: '.like-number',
+			newest: function( itemElem ) { // function
+		      var orderAdded = $( itemElem ).attr('data-order-added')
+		      return parseInt(orderAdded); 
+		    },
+	    	oldest: function( itemElem ) { // function
+	          var orderAdded = $( itemElem ).attr('data-order-added')
+	          return parseInt(orderAdded); 
+	        },
+	        popular: function( itemElem ) { // function
+	          var likes = $( itemElem ).find('.like-number').text();
+	          console.log(likes);
+	          return parseInt(likes); 
+	        }
+
+		}
 	});
+
+
 
 	var filterButtons = $('main .filter-container');
 	var filters = [];
@@ -348,6 +362,25 @@ makeupApp.looksGallerySetup = function () {
 		var index = filters.indexOf(filter);
 		if (index != -1) {
 			filters.splice(index, 1);
+		}
+	}
+
+	$('#looks-sort').on('change', function () {
+		var sortValue = $(this).val();
+		var ascending = sortOrder(sortValue)
+		looksGallery.isotope({
+			sortBy: sortValue,
+			sortAscending: ascending		
+		})
+	});
+
+	function sortOrder (sortValue) {
+		if (sortValue === 'newest') {
+			return false;
+		} else if (sortValue === 'oldest') {
+			return true;
+		} else {
+			return false;
 		}
 	}
 };
