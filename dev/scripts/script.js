@@ -132,6 +132,8 @@ makeupApp.loadLooks = function () {
 			$('.home').toggleClass('disable-buttons'); // prevent accidental interaction with the home view while in look-details view
 			makeupApp.makeDetailedPage(look);
 			$('.look-details').toggleClass('hidden');
+			$('.home').addClass('hidden')
+
 		});
 	});
 };
@@ -152,6 +154,7 @@ makeupApp.detailViewSetup = function () {
 			$('.dot').remove();
 			$('.home').toggleClass('disable-buttons'); // allow interaction with the home view again
 		}, 300);
+		$('.home').removeClass('hidden')
 	});
 
 	makeupApp.productFilterSetup();
@@ -234,7 +237,7 @@ makeupApp.productGallerySetup = function (look) {
 
 		productTemplateItem.find('.product-img-cell img').attr('src', productInfo.image_link);
 		productTemplateItem.find('.product-price').text(productInfo.price);
-		productTemplateItem.find('.product-name').text(productInfo.name);
+		productTemplateItem.find('.product-name a').text(productInfo.name).attr('href', productInfo.product_link);
 
 		// set up classes for filtering
 		var productType = productInfo.product_type;
