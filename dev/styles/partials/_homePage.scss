@@ -1,10 +1,14 @@
 .home {
     background: url("../../assets/brush.png");
-    background-size: contain;
+    background-size: 1700px;
     background-position: top;
     background-repeat: no-repeat;
 }
 
+// html, body {
+//     height: 100vh;
+//     overflow: hidden;
+// }
 header {
     position: relative;
     height: 100vh;
@@ -45,6 +49,8 @@ header {
                 font-family: $bodyFont;
                 letter-spacing: 2px;
                 color: white;
+                font-style: italic;
+
             }
         }
     }
@@ -297,4 +303,89 @@ $dotSize: 16px;
 
 .master-wishlist {
 	display: block;
+}
+
+@media (max-width: 960px) {
+
+    header {
+        // margin: auto;
+        .header-content {
+            width: 80%;
+            margin: auto;
+            .headerText {
+                margin: 0 auto;
+                width: 300px;
+                h1 {
+                    font-size: 50px;
+                    letter-spacing: 15px;
+                    span {
+                        font-size: 30px;
+                        letter-spacing: 7px;
+                    }
+                }
+                h2 {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+}
+
+@media (max-width: 840px) {
+
+    header {
+        .header-content {
+            width: 70%;
+            margin: auto;
+            .headerText {
+                margin: 0 auto;
+                width: 250px;
+                h1 {
+                    font-size: 34px;
+                    letter-spacing: 15px;
+                    span {
+                        font-size: 20px;
+                        letter-spacing: 7px;
+                        margin-bottom: 20px;
+                    }
+                }
+                h2 {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    header {
+        .header-content {
+            svg{
+                transform: scale(0.5)
+            }
+            width: 60%;
+            margin: auto;
+            .headerText {
+                margin: 0 auto;
+                width: 230px;
+                h1 {
+                    font-size: 34px;
+                    letter-spacing: 15px;
+                    span {
+                        font-size: 20px;
+                        letter-spacing: 7px;
+                        margin-bottom: 20px;
+                    }
+                }
+                h2 {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
 }
