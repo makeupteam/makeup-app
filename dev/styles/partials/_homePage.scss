@@ -389,3 +389,41 @@ $dotSize: 16px;
     }
 
 }
+
+/* Portrait tablet and small desktops */
+ @media (max-width: 1040px) {
+ 	.look-cell {
+ 	    .look-type {
+ 			display: none;
+ 		}
+ 		// .look-type{
+             // bottom: 6.5vw;
+ 		// }
+ 	}
+ 	.option-container, .option-container:last-child {
+ 		float: none;
+ 		width: 100%;
+		text-align: left;
+ 		margin: 1.5rem 0;
+ 		.filter-container {
+ 			button {
+ 				margin: 1rem 0;
+ 			}
+ 		}
+ 	}
+ }
+ 
+ /* Landscape phone to portrait tablet */
+ @media (max-width: 768px) {
+ 	.look-cell {
+ 	    width: 35vw;
+ 	    height: 35vw;
+ 	    .overlay {
+ 	        width: 35vw;
+ 	        height: 35vw;
+ 		}
+ 		// .look-type{
+             // bottom: 6.5vw;
+ 		// }
+ 	}
+ }
