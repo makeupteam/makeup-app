@@ -126,9 +126,7 @@ makeupApp.loadLooks = function () {
 		templateItem.find('.like-number').text(look.likes);
 		templateItem.find('.like-button').on('click', function () {//selects template item
 			//find the like button, on click, function runs
-			console.log(look.id);
 			if ($(`#likes-cell-${look.id} .like-button`).hasClass('liked')) {
-				console.log('decrement this counter')
 				looksDB.update({//updates the DB with
 					[`look${look.id}`]: Object.assign({}, look, {
 						//corresponding look thats being clicked, goes into DB
@@ -142,7 +140,6 @@ makeupApp.loadLooks = function () {
 						$(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/heart.png');
 					});
 			} else {
-				console.log('increment this counter')
 				looksDB.update({//updates the DB with
 					[`look${look.id}`]: Object.assign({}, look, {
 						//corresponding look thats being clicked, goes into DB
