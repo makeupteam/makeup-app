@@ -77,35 +77,8 @@ makeupApp.collapseHero = function() {
 }
 
 
-// AJAX call to API
-makeupApp.getProductData = function () {
-	$.ajax({
-		url: 'http://makeup-api.herokuapp.com/api/v1/products.json',
-		method: 'GET',
-		dataType: 'json',
-	}).then(function (res) {
-		$('.home').toggleClass('disable-buttons'); // allow interaction with the home view
-		let productResults = res;
-		productResults.forEach(function (result) {
-			makeupApp.products[result.id] = result;
-		});
-		$('.loader-container').fadeOut();
-		makeupApp.collapseHero();
-	});
-};
 
-// collapse hero once ajax call is done
-makeupApp.collapseHero = function() {
-	$('header').css({
-		'height': '35vh'
-		// 'margin-top': '20vh'
-	});
-	$('.header-content').css({
-		'transform': 'scale(1.0)',
-		'margin-top': '25vh',
-		'margin-bottom': '10vh'
-	})
-}
+
 
 
 
@@ -166,6 +139,8 @@ makeupApp.loadLooks = function () {
 			$('.home').toggleClass('disable-buttons'); // prevent accidental interaction with the home view while in look-details view
 			makeupApp.makeDetailedPage(look);
 			$('.look-details').toggleClass('hidden');
+			$('.home').addClass('hidden')
+
 		});
 	});
 };
@@ -186,6 +161,7 @@ makeupApp.detailViewSetup = function () {
 			$('.dot').remove();
 			$('.home').toggleClass('disable-buttons'); // allow interaction with the home view again
 		}, 300);
+		$('.home').removeClass('hidden')
 	});
 
 	makeupApp.productFilterSetup();
@@ -269,7 +245,7 @@ makeupApp.productGallerySetup = function (look) {
 
 		productTemplateItem.find('.product-img-cell img').attr('src', productInfo.image_link);
 		productTemplateItem.find('.product-price').text(productInfo.price);
-		productTemplateItem.find('.product-name').text(productInfo.name);
+		productTemplateItem.find('.product-name a').text(productInfo.name).attr('href', productInfo.product_link);
 
 		// set up classes for filtering
 		var productType = productInfo.product_type;
