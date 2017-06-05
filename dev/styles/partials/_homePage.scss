@@ -427,19 +427,3 @@ $dotSize: 16px;
 
 }
 
-
- 
- /* Landscape phone to portrait tablet */
- @media (max-width: 768px) {
- 	.look-cell {
- 	    width: 35vw;
- 	    height: 35vw;
- 	    .overlay {
- 	        width: 35vw;
- 	        height: 35vw;
- 		}
- 		// .look-type{
-             // bottom: 6.5vw;
- 		// }
- 	}
- }
