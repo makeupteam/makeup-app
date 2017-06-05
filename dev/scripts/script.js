@@ -59,7 +59,7 @@ makeupApp.getProductData = function () {
 		});
 		$('.loader-container').fadeOut();
 		makeupApp.collapseHero();
-		makeupApp.fadeInHomePage();
+		// $('body').css('overflow', 'show')
 	});
 };
 
@@ -76,19 +76,6 @@ makeupApp.collapseHero = function() {
 	})
 }
 
-// load homepage when ajax call is done
-makeupApp.fadeInHomePage = function() {
-	// meanwhile load firebase data and then set up views
-	looksDB.once('value', function (res) {
-		let data = res.val();
-		for (var look in data) {
-			makeupApp.looks.push(data[look]);
-		}
-		makeupApp.loadLooks();
-		makeupApp.looksGallerySetup();
-		makeupApp.detailViewSetup();
-	});
-};
 
 // AJAX call to API
 makeupApp.getProductData = function () {
@@ -104,7 +91,6 @@ makeupApp.getProductData = function () {
 		});
 		$('.loader-container').fadeOut();
 		makeupApp.collapseHero();
-		// makeupApp.fadeInHomePage();
 	});
 };
 
