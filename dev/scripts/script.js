@@ -164,16 +164,18 @@ makeupApp.productFilterSetup = function () {
 
 	var productGallery = $('.products-gallery');
 
-	makeupApp.productfilters = {
+	makeupApp.productFilters = {
 		categories: [],
-		brands: []
+		brands: [],
+		minPrice: 0,
+		maxPrice: 40
 	};
 
 	function customFilter() {
 		var match = true;
-		for (var filter in makeupApp.productfilters) {
-			if (makeupApp.productfilters[filter].length > 0) {
-				match = match && $(this).is(makeupApp.productfilters[filter].join(", "));
+		for (var filter in makeupApp.productFilters) {
+			if (makeupApp.productFilters[filter].length > 0) {
+				match = match && $(this).is(makeupApp.productFilters[filter].join(", "));
 			}
 		}
 		return match;
@@ -196,15 +198,15 @@ makeupApp.productFilterSetup = function () {
 	});
 
 	function addFilter(filter, type) {
-		if (makeupApp.productfilters[type].indexOf(filter) == -1) {
-			makeupApp.productfilters[type].push(filter);
+		if (makeupApp.productFilters[type].indexOf(filter) == -1) {
+			makeupApp.productFilters[type].push(filter);
 		}
 	}
 
 	function removeFilter(filter, type) {
-		var index = makeupApp.productfilters[type].indexOf(filter);
+		var index = makeupApp.productFilters[type].indexOf(filter);
 		if (index != -1) {
-			makeupApp.productfilters[type].splice(index, 1);
+			makeupApp.productFilters[type].splice(index, 1);
 		}
 	}
 }
@@ -308,9 +310,11 @@ makeupApp.productGallerySetup = function (look) {
 			itemSelector: '.product-cell'
 		});
 
-		makeupApp.productfilters = {
+		makeupApp.productFilters = {
 			categories: [],
-			brands: []
+			brands: [],
+			minPrice: 0,
+			maxPrice: 40
 		};
 	}
 }
@@ -439,12 +443,34 @@ makeupApp.initSlider = function () {
 
 			$('.range').html('<span class="range-value"><sup>$</sup>' + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span><span class="range-divider"></span><span class="range-value"><sup>$</sup>' + ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
 
-			// Get old value
-			var previousVal = parseInt($(this).data('value'));
 			// Save new value
 			$(this).data({
 				'value': parseInt(ui.value)
 			});
+
+			// update productFilters
+			var minChange = ui.values[0];
+			var maxChange = ui.values[1];
+			var currentMin = makeupApp.productFilters.minPrice;
+			var currentMax = makeupApp.productFilters.maxPrice;
+
+			if (minChange === currentMin) {
+				makeupApp.productFilters.maxPrice = maxChange;
+			} else if (maxChange === currentMax) {
+				makeupApp.productFilters.minPrice = minChange;
+			}
+
+			currentMin = makeupApp.productFilters.minPrice;
+			currentMax = makeupApp.productFilters.maxPrice;
+
+			$('.products-gallery').isotope({
+				filter: function () {
+					var price = parseInt($(this).find('.product-price').text(), 10);
+					// return true to show, false to hide
+					return price >= currentMin && (price <= currentMax || currentMax === 40);
+				}
+			})
+
 		}
 	});
 
