@@ -213,7 +213,14 @@ makeupApp.makeDetailedPage = function (look) {
 	$('.look-img-cell img').attr('src', look.imageURL);
 	$('.look-name').text(look.name);
 	$('.look-likes').text(look.likes);
-
+	$('#slider-range').slider({
+		range: true,
+		min: 0,
+		max: 40,
+		step: 1,
+		values: [0, 40]
+	});
+	
 	makeupApp.productGallerySetup(look);
 };
 
