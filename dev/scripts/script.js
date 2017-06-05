@@ -139,10 +139,6 @@ makeupApp.loadLooks = function () {
 };
 
 makeupApp.detailViewSetup = function () {
-	// $('.add-to-wishlist').on('click', function () {
-	// 	$('.master-wishlist').append(`<h1>WHATSUP</h1>`)
-	// })
-
 	// exit detail page
 	$('.exit-detail').on('click', function () {
 		$('.look-details').toggleClass('hidden');
