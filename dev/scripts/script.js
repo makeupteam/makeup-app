@@ -113,7 +113,7 @@ makeupApp.collapseHero = function() {
 makeupApp.loadLooks = function () {
 	var looksGallery = $('.looks-gallery');
 	var lookTemplate = $('#look-template').html();
-	makeupApp.looks.forEach(function(look) {
+	makeupApp.looks.forEach(function (look) {
 		var templateItem = $(lookTemplate);//magic
 
 
@@ -126,9 +126,7 @@ makeupApp.loadLooks = function () {
 		templateItem.find('.like-number').text(look.likes);
 		templateItem.find('.like-button').on('click', function () {//selects template item
 			//find the like button, on click, function runs
-			console.log(look.id);
-			if ( $(`#likes-cell-${look.id} .like-button`).hasClass('liked') ) {
-				console.log('decrement this counter')
+			if ($(`#likes-cell-${look.id} .like-button`).hasClass('liked')) {
 				looksDB.update({//updates the DB with
 					[`look${look.id}`]: Object.assign({}, look, {
 						//corresponding look thats being clicked, goes into DB
@@ -137,12 +135,11 @@ makeupApp.loadLooks = function () {
 						//update is being sent to DB
 					})
 				})
-				.then(function() {
-					$(`#likes-cell-${look.id} .like-number`).text(look.likes);
-					$(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/heart.png');
-				});
+					.then(function () {
+						$(`#likes-cell-${look.id} .like-number`).text(look.likes);
+						$(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/heart.png');
+					});
 			} else {
-				console.log('increment this counter')
 				looksDB.update({//updates the DB with
 					[`look${look.id}`]: Object.assign({}, look, {
 						//corresponding look thats being clicked, goes into DB
@@ -151,10 +148,10 @@ makeupApp.loadLooks = function () {
 						//update is being sent to DB
 					})
 				})
-				.then(function() {
-					$(`#likes-cell-${look.id} .like-number`).text(look.likes);
-					$(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/filled_heart.png');
-				});
+					.then(function () {
+						$(`#likes-cell-${look.id} .like-number`).text(look.likes);
+						$(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/filled_heart.png');
+					});
 			}
 
 			$(`#likes-cell-${look.id} .like-button`).toggleClass('liked')
@@ -361,23 +358,20 @@ makeupApp.looksGallerySetup = function () {
 		itemSelector: '.look-cell',
 		layoutMode: 'fitRows',
 		getSortData: {
-	        popular: function( itemElem ) { // function
-	          var likes = $( itemElem ).find('.like-number').text();
-	          return parseInt(likes);
-	        },
-			newest: function( itemElem ) { // function
-		      var orderAdded = $( itemElem ).attr('data-order-added')
-		      return parseInt(orderAdded);
-		    },
-	    	oldest: function( itemElem ) { // function
-	          var orderAdded = $( itemElem ).attr('data-order-added')
-	          return parseInt(orderAdded);
-	        }
-
+			popular: function (itemElem) { // function
+				var likes = $(itemElem).find('.like-number').text();
+				return parseInt(likes);
+			},
+			newest: function (itemElem) { // function
+				var orderAdded = $(itemElem).attr('data-order-added')
+				return parseInt(orderAdded);
+			},
+			oldest: function (itemElem) { // function
+				var orderAdded = $(itemElem).attr('data-order-added')
+				return parseInt(orderAdded);
+			}
 		}
 	});
-
-
 
 	var filterButtons = $('main .filter-container');
 	var filters = [];
@@ -428,7 +422,7 @@ makeupApp.looksGallerySetup = function () {
 		})
 	});
 
-	function sortOrder (sortValue) {
+	function sortOrder(sortValue) {
 		if (sortValue === 'newest') {
 			return false;
 		} else if (sortValue === 'oldest') {
@@ -437,6 +431,11 @@ makeupApp.looksGallerySetup = function () {
 			return false;
 		}
 	}
+
+	looksGallery.isotope({
+		sortBy: 'popular',
+		sortAscending: false
+	})
 };
 
 // document ready
