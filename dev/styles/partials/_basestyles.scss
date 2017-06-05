@@ -9,7 +9,7 @@ body {
 }
 
 .wrapper {
-	max-width: 1080px;
+	max-width: 80vw;
 	margin: 0 auto;
 	padding: 2rem;
 }
@@ -34,14 +34,7 @@ h1 {
 	}
 }
 
-header h2 {
-	font-family: $bodyFont;
-	font-style: italic;
-	font-size: 1rem;
-	color: white;
-	font-weight: 300;
-	text-transform: lowercase;
-}
+
 
 ul {
 	list-style: none;
@@ -78,6 +71,7 @@ footer {
 .hidden {
     visibility: hidden;
 	// display: none;
+	height: 0;
     opacity: 0;
     transition: visibility 0s linear 0.3s, opacity 0.3s;
 }
