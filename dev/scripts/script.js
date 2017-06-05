@@ -60,7 +60,9 @@ makeupApp.getProductData = function () {
 		});
 		$('.loader-container').fadeOut();
 		makeupApp.collapseHero();
-		// $('body').css('overflow', 'show')
+		// $('html').css('height', 'initial')
+		// $('body').css('height', 'initial')
+
 	});
 };
 

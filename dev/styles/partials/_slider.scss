@@ -16,11 +16,11 @@
 }
 
 .ui-slider-range{
-  background: #71c0ff;
+  background: lightsteelblue;
   height: 20px;
   position: absolute;
-  border-top: 1px solid #5d99c8;
-  border-bottom: 1px solid #5d99c8;
+  // border-top: 1px solid #5d99c8;
+  // border-bottom: 1px solid #5d99c8;
   transform: translateY(-1px);
 
   &:after{
