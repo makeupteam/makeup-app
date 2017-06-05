@@ -167,16 +167,6 @@ makeupApp.productFilterSetup = function () {
 		maxPrice: 40
 	};
 
-	function customFilter() {
-		var match = true;
-		for (var filter in makeupApp.productFilters) {
-			if (makeupApp.productFilters[filter].length > 0) {
-				match = match && $(this).is(makeupApp.productFilters[filter].join(", "));
-			}
-		}
-		return match;
-	};
-
 	$('.product-section .filter-container').on('click', 'button', function (event) {
 		var $target = $(event.currentTarget);
 		var type = $(event.delegateTarget).find("h4").text().toLowerCase();
@@ -190,7 +180,7 @@ makeupApp.productFilterSetup = function () {
 			removeFilter(filter, type);
 		}
 		// filter isotope
-		productGallery.isotope({ filter: customFilter });
+		productGallery.isotope({ filter: makeupApp.customFilter });
 	});
 
 	function addFilter(filter, type) {
@@ -207,6 +197,21 @@ makeupApp.productFilterSetup = function () {
 	}
 }
 
+makeupApp.customFilter = function() {
+	var match = true;
+	var currentMin = makeupApp.productFilters.minPrice;
+	var currentMax = makeupApp.productFilters.maxPrice;
+	for (var filter in makeupApp.productFilters) {
+		if (makeupApp.productFilters[filter].length > 0) {
+			match = match && $(this).is(makeupApp.productFilters[filter].join(", "));
+		} else {
+			var price = parseInt($(this).find('.product-price').text(), 10);
+			match = match && price >= currentMin && (price <= currentMax || currentMax === 40);
+		}
+	}
+	return match;
+};
+
 // building the detailed view based on look selected
 makeupApp.makeDetailedPage = function (look) {
 	// filling in look details based on look selected
@@ -220,7 +225,7 @@ makeupApp.makeDetailedPage = function (look) {
 		step: 1,
 		values: [0, 40]
 	});
-	
+
 	makeupApp.productGallerySetup(look);
 };
 
@@ -287,7 +292,7 @@ makeupApp.productGallerySetup = function (look) {
 	makeupApp.makeWishlistPage = function (pinnedItems) {
 		let item = pinnedItems;
 		console.log(item);
-		$('.add-to-wishlist').on('click', function() {
+		$('.add-to-wishlist').on('click', function () {
 			for (var i = 0; i < pinnedItems.length; i++) {
 				// filling in wishlist based on look selected
 				console.log(makeupApp.products[item[i]].name);
@@ -481,13 +486,8 @@ makeupApp.initSlider = function () {
 			currentMax = makeupApp.productFilters.maxPrice;
 
 			$('.products-gallery').isotope({
-				filter: function () {
-					var price = parseInt($(this).find('.product-price').text(), 10);
-					// return true to show, false to hide
-					return price >= currentMin && (price <= currentMax || currentMax === 40);
-				}
-			})
-
+				filter: makeupApp.customFilter
+			});
 		}
 	});
 
