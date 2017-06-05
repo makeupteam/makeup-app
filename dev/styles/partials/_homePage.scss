@@ -203,7 +203,6 @@ $dotSize: 16px;
     width: 16vw;
     height: 16vw;
     margin-right: 5%;
-
     margin-bottom: 5%;
     position: relative;
     overflow: hidden;
@@ -282,6 +281,8 @@ $dotSize: 16px;
 }
 
 .look-cell:hover{
+	transform: scale(1.05);
+	transition: all 0.5s;
     .overlay{
         opacity: 1;
     }
