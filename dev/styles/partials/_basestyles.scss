@@ -76,6 +76,10 @@ footer {
     transition: visibility 0s linear 0.3s, opacity 0.3s;
 }
 
+.wishlist-hidden {
+	display: none;
+}
+
 .disable-buttons {
     pointer-events: none;
 }
@@ -84,4 +88,3 @@ footer {
 		font-weight: 500;
 		color: $purple;
 }
-
