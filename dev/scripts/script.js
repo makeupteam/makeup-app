@@ -31,6 +31,7 @@ makeupApp.init = function () {
 		makeupApp.loadLooks();
 		makeupApp.looksGallerySetup();
 		makeupApp.detailViewSetup();
+		makeupApp.initSlider();
 	});
 
 	// setup listeners for main page
@@ -64,7 +65,7 @@ makeupApp.getProductData = function () {
 };
 
 // collapse hero once ajax call is done
-makeupApp.collapseHero = function() {
+makeupApp.collapseHero = function () {
 	$('header').css({
 		'height': '35vh'
 		// 'margin-top': '20vh'
@@ -74,13 +75,7 @@ makeupApp.collapseHero = function() {
 		'margin-top': '25vh',
 		'margin-bottom': '10vh'
 	})
-}
-
-
-
-
-
-
+};
 
 // dynamically add looks-thumbnails to main page gallery
 makeupApp.loadLooks = function () {
@@ -107,11 +102,10 @@ makeupApp.loadLooks = function () {
 						likes: look.likes -= 1,
 						//update is being sent to DB
 					})
-				})
-					.then(function () {
-						$(`#likes-cell-${look.id} .like-number`).text(look.likes);
-						$(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/heart.png');
-					});
+				}).then(function () {
+					$(`#likes-cell-${look.id} .like-number`).text(look.likes);
+					$(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/heart.png');
+				});
 			} else {
 				looksDB.update({//updates the DB with
 					[`look${look.id}`]: Object.assign({}, look, {
@@ -120,14 +114,13 @@ makeupApp.loadLooks = function () {
 						likes: look.likes += 1,
 						//update is being sent to DB
 					})
-				})
-					.then(function () {
-						$(`#likes-cell-${look.id} .like-number`).text(look.likes);
-						$(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/filled_heart.png');
-					});
+				}).then(function () {
+					$(`#likes-cell-${look.id} .like-number`).text(look.likes);
+					$(`#likes-cell-${look.id} .like-icon`).attr('src', 'assets/filled_heart.png');
+				});
 			}
 
-			$(`#likes-cell-${look.id} .like-button`).toggleClass('liked')
+			$(`#likes-cell-${look.id} .like-button`).toggleClass('liked');
 
 		});
 
@@ -146,10 +139,6 @@ makeupApp.loadLooks = function () {
 };
 
 makeupApp.detailViewSetup = function () {
-	// $('.add-to-wishlist').on('click', function () {
-	// 	$('.master-wishlist').append(`<h1>WHATSUP</h1>`)
-	// })
-
 	// exit detail page
 	$('.exit-detail').on('click', function () {
 		$('.look-details').toggleClass('hidden');
@@ -171,16 +160,18 @@ makeupApp.productFilterSetup = function () {
 
 	var productGallery = $('.products-gallery');
 
-	makeupApp.productfilters = {
+	makeupApp.productFilters = {
 		categories: [],
-		brands: []
+		brands: [],
+		minPrice: 0,
+		maxPrice: 40
 	};
 
 	function customFilter() {
 		var match = true;
-		for (var filter in makeupApp.productfilters) {
-			if (makeupApp.productfilters[filter].length > 0) {
-				match = match && $(this).is(makeupApp.productfilters[filter].join(", "));
+		for (var filter in makeupApp.productFilters) {
+			if (makeupApp.productFilters[filter].length > 0) {
+				match = match && $(this).is(makeupApp.productFilters[filter].join(", "));
 			}
 		}
 		return match;
@@ -203,15 +194,15 @@ makeupApp.productFilterSetup = function () {
 	});
 
 	function addFilter(filter, type) {
-		if (makeupApp.productfilters[type].indexOf(filter) == -1) {
-			makeupApp.productfilters[type].push(filter);
+		if (makeupApp.productFilters[type].indexOf(filter) == -1) {
+			makeupApp.productFilters[type].push(filter);
 		}
 	}
 
 	function removeFilter(filter, type) {
-		var index = makeupApp.productfilters[type].indexOf(filter);
+		var index = makeupApp.productFilters[type].indexOf(filter);
 		if (index != -1) {
-			makeupApp.productfilters[type].splice(index, 1);
+			makeupApp.productFilters[type].splice(index, 1);
 		}
 	}
 }
@@ -222,10 +213,16 @@ makeupApp.makeDetailedPage = function (look) {
 	$('.look-img-cell img').attr('src', look.imageURL);
 	$('.look-name').text(look.name);
 	$('.look-likes').text(look.likes);
-
+	$('#slider-range').slider({
+		range: true,
+		min: 0,
+		max: 40,
+		step: 1,
+		values: [0, 40]
+	});
+	
 	makeupApp.productGallerySetup(look);
 };
-
 
 // to set up the product gallery based on selected look
 makeupApp.productGallerySetup = function (look) {
@@ -285,7 +282,6 @@ makeupApp.productGallerySetup = function (look) {
 			pinnedItems.push(productInfo.id);
 			makeupApp.makeWishlistPage(pinnedItems);
 		});
-
 	};
 
 	makeupApp.makeWishlistPage = function (pinnedItems) {
@@ -331,13 +327,27 @@ makeupApp.productGallerySetup = function (look) {
 			itemSelector: '.product-cell'
 		});
 
-		makeupApp.productfilters = {
+		makeupApp.productFilters = {
 			categories: [],
-			brands: []
+			brands: [],
+			minPrice: 0,
+			maxPrice: 40
 		};
 	}
 }
 
+makeupApp.makeWishlistPage = function (pinnedItems) {
+	let item = pinnedItems;
+	console.log(item);
+	$('.add-to-wishlist').on('click', function () {
+		for (var i = 0; i < pinnedItems.length; i++) {
+			// filling in wishlist based on look selected
+			console.log(makeupApp.products[item[i]].name);
+			// $('.wishlist-look-cell img').attr('src', item.imageURL);
+			$('.wishlist-product-list').append(makeupApp.products[item[i]].name, makeupApp.products[item[i]].price);
+		}
+	});
+};
 
 makeupApp.looksGallerySetup = function () {
 	// Set up isotope.js on looks gallery
@@ -424,6 +434,68 @@ makeupApp.looksGallerySetup = function () {
 		sortAscending: false
 	})
 };
+
+makeupApp.initSlider = function () {
+	// Initiate Slider
+	$('#slider-range').slider({
+		range: true,
+		min: 0,
+		max: 40,
+		step: 1,
+		values: [0, 40]
+	});
+
+	// Move the range wrapper into the generated divs
+	$('.ui-slider-range').append($('.range-wrapper'));
+
+	// Apply initial values to the range container
+	$('.range').html('<span class="range-value"><sup>$</sup>' + $('#slider-range').slider("values", 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span><span class="range-divider"></span><span class="range-value"><sup>$</sup>' + $("#slider-range").slider("values", 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
+
+	var rangeWidth = $('.ui-slider-range').css('width');
+
+	$('#slider-range').slider({
+		slide: function (event, ui) {
+
+			// Update the range container values upon sliding
+
+			$('.range').html('<span class="range-value"><sup>$</sup>' + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span><span class="range-divider"></span><span class="range-value"><sup>$</sup>' + ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
+
+			// Save new value
+			$(this).data({
+				'value': parseInt(ui.value)
+			});
+
+			// update productFilters
+			var minChange = ui.values[0];
+			var maxChange = ui.values[1];
+			var currentMin = makeupApp.productFilters.minPrice;
+			var currentMax = makeupApp.productFilters.maxPrice;
+
+			if (minChange === currentMin) {
+				makeupApp.productFilters.maxPrice = maxChange;
+			} else if (maxChange === currentMax) {
+				makeupApp.productFilters.minPrice = minChange;
+			}
+
+			currentMin = makeupApp.productFilters.minPrice;
+			currentMax = makeupApp.productFilters.maxPrice;
+
+			$('.products-gallery').isotope({
+				filter: function () {
+					var price = parseInt($(this).find('.product-price').text(), 10);
+					// return true to show, false to hide
+					return price >= currentMin && (price <= currentMax || currentMax === 40);
+				}
+			})
+
+		}
+	});
+
+	// Prevent the range container from moving the slider
+	$('.range, .range-alert').on('mousedown', function (event) {
+		event.stopPropagation();
+	});
+}
 
 // document ready
 $(function () {
