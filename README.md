@@ -10,12 +10,3 @@ You will need to use Firebase to store the average ratings and display this data
 * Come up with a list of appealing images that represents a different ‘look’
 * Allow user to rate the different ‘looks’ (use firebase to store this data)
 * Allow users to filter their search by brands, price, and ratings.
- 
-### Deadline:
-1. Wireframes by Wednesday
-2. Beta by Thursday
-3. Final by the following Monday.
- 
-### Deliverables: 
-* Project up on github
-* Project on URL, can be ghpages url.

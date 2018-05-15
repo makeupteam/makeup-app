@@ -1,11 +1,11 @@
 // Initialize Firebase
 var config = {
-	apiKey: "AIzaSyCBglzrqevMRAKJWrr_-ZWWJj7lCGqJEso",
-	authDomain: "makeup-app-d1fac.firebaseapp.com",
-	databaseURL: "https://makeup-app-d1fac.firebaseio.com",
-	projectId: "makeup-app-d1fac",
-	storageBucket: "makeup-app-d1fac.appspot.com",
-	messagingSenderId: "220771434860"
+	apiKey: "AIzaSyCLTxVIStnsPpIdwn5KcbaBQQ5DHZxSxSo",
+	authDomain: "the-beauty-log.firebaseapp.com",
+	databaseURL: "https://the-beauty-log.firebaseio.com",
+	projectId: "the-beauty-log",
+	storageBucket: "the-beauty-log.appspot.com",
+	messagingSenderId: "1079368637135"
 };
 firebase.initializeApp(config);
 
@@ -49,7 +49,7 @@ makeupApp.init = function () {
 // AJAX call to API
 makeupApp.getProductData = function () {
 	$.ajax({
-		url: 'http://makeup-api.herokuapp.com/api/v1/products.json',
+		url: 'https://makeup-api.herokuapp.com/api/v1/products.json',
 		method: 'GET',
 		dataType: 'json',
 	}).then(function (res) {
